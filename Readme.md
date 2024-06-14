@@ -7,5 +7,5 @@ This is just a bunch of fill text that will be removed
 - William Cameron
 - K3vin
 - Alv&r000
-- E7ic
+- Eric
 - M&rtin
