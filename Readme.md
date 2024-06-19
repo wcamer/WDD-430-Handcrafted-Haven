@@ -4,7 +4,7 @@ This is just a bunch of fill text that will be removed
 
 ### Group Members
 
-- William Cameronn
+- William Cameron
 - Kevin
 - Alvaro
 - Eric
