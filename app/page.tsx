@@ -1,3 +1,11 @@
 export default function Page() {
-  return <main className="flex min-h-screen flex-col p-6">Home page</main>;
+  return (
+    <main className="h-[32rem]">
+      <h1>Home Page</h1>
+      <p className="mt-4	">
+        The space here is to show that the footer stays at the bottom of the
+        page.
+      </p>
+    </main>
+  );
 }
