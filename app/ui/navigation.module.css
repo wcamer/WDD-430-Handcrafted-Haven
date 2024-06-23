@@ -5,6 +5,7 @@
   background-color: rgba(0, 0, 0, 0);
   transition: background-color ease-in-out 0.25s;
   border-radius: 0.5rem;
+  user-select: none;
 }
 .navLink:hover {
   background-color: rgb(74 222 128);
