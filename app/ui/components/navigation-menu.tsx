@@ -18,28 +18,19 @@ export default function NavigationMenu(navigationMenu: NavigationMenue) {
     `fixed grid ${Spacer.spacer} py-4 top-[5rem] right-0 rounded-bl-lg`,
   ];
 
-  const [windowState, setwindowState] = useState(true);
-  // needed to access window through nextjs
-  useEffect(() => setwindowState(window.innerWidth >= 600), []);
-
+  const [isFullNav, setIsFullNav] = useState(false);
   const [menuState, setMenuState] = useState(0);
-  const [windWidth, setWindWidth] = useState(0);
 
   useEffect(() => {
+    setIsFullNav(window.innerWidth >= 600);
     window.addEventListener('resize', () => {
-      setWindWidth(window.innerWidth);
-      if (windWidth > 600) {
-        setwindowState(true);
-      } else {
-        setwindowState(false);
-      }
-    }),
-      [];
-  });
+      setIsFullNav(window.innerWidth >= 600);
+    });
+  }, []);
 
   return (
     <>
-      <nav className={windowState ? '' : menuStateOptions[menuState]}>
+      <nav className={isFullNav ? '' : menuStateOptions[menuState]}>
         <Link
           className={`${Navigation.navLink} hover:${Navigation.navLinkHover}`}
           href="/"
@@ -68,7 +59,7 @@ export default function NavigationMenu(navigationMenu: NavigationMenue) {
           </Link>
         )}
       </nav>
-      {!windowState && (
+      {!isFullNav && (
         <Bars3Icon
           className="w-8 cursor-pointer"
           onClick={() => {
