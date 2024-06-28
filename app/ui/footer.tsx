@@ -6,7 +6,8 @@ export default function Footer() {
       className={`bottom sticky flex flex-row justify-between rounded-t-lg ${styles.spacer} px-4 py-6`}
     >
       <p>Company Logo</p>
-      <p>Handcrafts App 2023</p>
+      <p>&copy; 2024 Handcrafted Haven Developed by:Team Echidna</p>
+     
     </footer>
   );
 }
