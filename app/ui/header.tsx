@@ -12,7 +12,7 @@ export default function Header() {
     <header
       className={`flex flex-row justify-between px-4 py-6 ${Spacer.spacer} rounded-b-lg`}
     >
-      <p>Company Logo & Name</p> {/* Fill img with profile pic*/}
+      <p>Company Logo / Handcrafted Haven</p> {/* Fill img with profile pic*/}
       <NavigationMenu isLoggedIn={isLoggedIn} />
     </header>
   );
