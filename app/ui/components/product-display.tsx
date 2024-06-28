@@ -1,23 +1,39 @@
 // 'use client'
 import Link from 'next/link'
 import Image from 'next/image'
-//need a product as an argument
-// export default function ProductDisplay(product) {
+
+// interface Product {
+//     name: string;
+//     price: string;
+//     link: string;
+//     rating: string;
+//     imageSrc: string;
+//     imageAlt: string;
+
+// }
+
+// interface ProductDisplayProps {
+//     product: Product;
+//   }
+
+// //need a product as an argument
+// export default function ProductDisplay({product}: ProductDisplayProps) {
 
 
 //     return (
 //         <section className='p-2 m-2 outline outline-9 outline-offset-2'>
 //             <div className='flex justify-center p-2 m-2 outline'>
-                // <Link 
-                //      href='/'
-                //   >
-                //         <Image 
-                //             src= {product.image}
-                //             width={600}
-                //             height={600}
-                //             alt={product.imageAlt}
-                //         />
-                // </Link>
+//                 <Link 
+//                     href='/'
+//                     //  href={product.link}
+//                   >
+//                         <Image 
+//                             src= {product.imageSrc}
+//                             width={600}
+//                             height={600}
+//                             alt={product.imageAlt}
+//                         />
+//                 </Link>
 //             </div>
 //             <div className='p2'>
 //                 <p className='flex justify-center'>{product.name}</p>
@@ -34,7 +50,7 @@ import Image from 'next/image'
 //     )
 // }
 
-//placeholder test code below 
+// placeholder test code below 
 export default function ProductDisplay() {
 
 
@@ -56,9 +72,9 @@ export default function ProductDisplay() {
             <div className='p2'>
                 <p className='flex justify-center'>Name of product</p>
                 <p>Price: $<span>1000</span></p>
-                <p>Rating</p>
+                <p>Rating: <span>7.7</span></p>
             </div>
-            <div className='text-center p2  outline outline-1 outline-offset-2'>
+            <div className='grid grid-cols-1 text-center p2  outline outline-1 outline-offset-2'>
             <button className=' p-2 bg-green-500 hover:text-white hover:bg-black'>Add To Cart</button>
             </div>
             
