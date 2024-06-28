@@ -1,5 +1,4 @@
-import ProductListing from "/app/ui/components/home-product-listing";
-
+import ProductListing from "./ui/components/home-product-listing";
 export default function Page() {
   return (
     <main className="h-[32rem]">
