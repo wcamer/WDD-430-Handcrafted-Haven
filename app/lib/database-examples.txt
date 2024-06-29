@@ -4,6 +4,7 @@ const users = [
     user_name: String,
     user_email: String,
     user_password: String,
+    date_created: String,
   },
 ];
 
@@ -13,6 +14,7 @@ const sellers = [
     seller_name: String,
     seller_email: String,
     seller_password: String,
+    date_created: String,
   },
 ];
 
@@ -25,6 +27,7 @@ const products = [
     product_price: Number,
     product_thumbnail: String,
     product_image: String,
+    date_added: String,
   },
 ];
 
@@ -35,6 +38,7 @@ const reviews = [
     product_id: String, // KEY
     review_description: String,
     review_rating: Number,
+    date_added: String,
   },
 ];
 
@@ -42,6 +46,7 @@ const cart_products = [
   {
     user_id: String, // KEY
     product_id: String, // KEY
+    date_added: String,
   },
 ];
 
@@ -49,5 +54,6 @@ const userBuyingHistory = [
   {
     user_id: String, // KEY
     product_id: String, // KEY
+    date_ordered: String,
   },
 ];
