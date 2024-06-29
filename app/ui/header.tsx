@@ -1,5 +1,5 @@
 import Link from 'next/link';
-
+import Image from 'next/image';
 import NavigationMenu from './components/navigation-menu';
 
 import Spacer from '@/app/ui/spacer.module.css';
@@ -10,9 +10,14 @@ export default function Header() {
 
   return (
     <header
-      className={`flex flex-row justify-between px-4 py-6 ${Spacer.spacer} rounded-b-lg`}
+      className={`flex flex-row items-center justify-between px-4 py-6 ${Spacer.spacer} `}
     >
-      <p>Company Logo & Name</p> {/* Fill img with profile pic*/}
+      <Image
+        src="/images/logo-l.png"
+        width={200}
+        height={51}
+        alt="logo"
+      />
       <NavigationMenu isLoggedIn={isLoggedIn} />
     </header>
   );

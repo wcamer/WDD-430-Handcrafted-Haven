@@ -1,12 +1,22 @@
 .navLink {
   margin-left: 1rem;
   margin-right: 1rem;
-  padding: 0.5rem;
-  background-color: rgba(0, 0, 0, 0);
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: #8ecae6;
   transition: background-color ease-in-out 0.25s;
   border-radius: 0.5rem;
   user-select: none;
 }
 .navLink:hover {
-  background-color: rgb(74 222 128);
+  background-color: #219ebc;
+}
+.hambMenu{
+  max-width: 2.5rem;
+  color: #219ebc;
+  cursor: pointer;
+}
+.hambMenu:hover{
+  color: #fb8500;
+  transition: color 0.5s;
 }
