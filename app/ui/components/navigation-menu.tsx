@@ -22,9 +22,9 @@ export default function NavigationMenu(navigationMenu: NavigationMenue) {
   const [menuState, setMenuState] = useState(0);
 
   useEffect(() => {
-    setIsFullNav(window.innerWidth >= 600);
+    setIsFullNav(window.innerWidth >= 640);
     window.addEventListener('resize', () => {
-      setIsFullNav(window.innerWidth >= 600);
+      setIsFullNav(window.innerWidth >= 640);
     });
   }, []);
 
@@ -61,7 +61,7 @@ export default function NavigationMenu(navigationMenu: NavigationMenue) {
       </nav>
       {!isFullNav && (
         <Bars3Icon
-          className="w-8 cursor-pointer"
+          className={Navigation.hambMenu}
           onClick={() => {
             setMenuState(menuState ^ 1);
           }}

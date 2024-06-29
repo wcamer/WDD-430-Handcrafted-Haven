@@ -1,6 +1,7 @@
 // 'use client'
 import Link from 'next/link'
 import Image from 'next/image'
+import Products from '@/app/ui/products.module.css';
 
 // interface Product {
 //     name: string;
@@ -55,8 +56,8 @@ export default function ProductDisplay() {
 
 
     return (
-        <section className='p-2 m-2 outline outline-9 outline-offset-2'>
-            <div className='flex justify-center p-2 m-2 outline'>
+        <section className={`${Products.prodCont}`}>
+            <div className='flex justify-center p-0'>
                 <Link
                     href='/'
                 >
@@ -69,13 +70,13 @@ export default function ProductDisplay() {
                 </Link>
                 
             </div>
-            <div className='p2'>
-                <p className='flex justify-center'>Name of product</p>
+            <div className='px-4 py-2'>
+                <p className='flex mb-2'>Name of product</p>
                 <p>Price: $<span>1000</span></p>
                 <p>Rating: <span>7.7</span></p>
             </div>
-            <div className='grid grid-cols-1 text-center p2  outline outline-1 outline-offset-2'>
-            <button className=' p-2 bg-green-500 hover:text-white hover:bg-black'>Add To Cart</button>
+            <div className='text-center'>
+            <button className={`${Products.prodBtn}`}>Add To Cart</button>
             </div>
             
            
