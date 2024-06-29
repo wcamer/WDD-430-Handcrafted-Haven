@@ -1,0 +1,53 @@
+const users = [
+  {
+    user_id: String, // KEY | use => crypto.randomUUID()
+    user_name: String,
+    user_email: String,
+    user_password: String,
+  },
+];
+
+const sellers = [
+  {
+    seller_id: String, // KEY | use => crypto.randomUUID()
+    seller_name: String,
+    seller_email: String,
+    seller_password: String,
+  },
+];
+
+const products = [
+  {
+    seller_id: String, // KEY
+    product_id: String, // KEY
+    product_description: String,
+    product_rating: Number,
+    product_price: Number,
+    product_thumbnail: String,
+    product_image: String,
+  },
+];
+
+const reviews = [
+  {
+    review_id: String, // KEY
+    user_id: String, // KEY
+    product_id: String, // KEY
+    review_description: String,
+    review_rating: Number,
+  },
+];
+
+const cart_products = [
+  {
+    user_id: String, // KEY
+    product_id: String, // KEY
+  },
+];
+
+const userBuyingHistory = [
+  {
+    user_id: String, // KEY
+    product_id: String, // KEY
+  },
+];
