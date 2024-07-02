@@ -9,16 +9,17 @@ export default function CheckoutForm(){
             <form className={` flex justify-center p-6 m-6 `}>
                 <fieldset className={`${Checkout.form} outline p-3 m-3`}>
                     <legend className='p-2 '>Purchase Form</legend>
-                    <label>Name</label><br />
-                    <input /><br /><br />
-                    <label>Address</label><br />
-                    <input /><br /><br />
-                    <label>City</label><br />
-                    <input /><br /><br />
-                    <label>State</label><br />
-                    <input /><br /><br />
-                    <label>Zip</label><br />
-                    <input /><br /><br />
+                    <label htmlFor='name'>Name</label><br />
+                    <input type='text'id='name'/><br /><br />
+                    <label htmlFor='address'>Address</label><br />
+                    <input type='text'id='address'/><br /><br />
+                    <label htmlFor='city'>City</label><br />
+                    <input type='text' id='city'/><br /><br />
+                    <label htmlFor='state'>State</label><br />
+                    <input type='text'id='state'/><br /><br />
+                    <label htmlFor='zip'>Zip</label><br />
+                    <input type='text'id='zip'/><br /><br />
+                   
                     {/* <input className={`${Checkout.submitBtn} `} type='submit' value='Complete Order' /> */}
                     
                     <Link className={`${Checkout.submitBtn} `}
