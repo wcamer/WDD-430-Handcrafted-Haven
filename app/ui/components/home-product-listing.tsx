@@ -26,9 +26,6 @@ export default function ProductListing() {
                 <ProductFilterButtons />
             </div>
 
-
-            
-
             <div className={` lg:col-start-2 col-end-5  `}>
                 <article className="p-2 m-2 grid gap-4 grid-cols-2  md:grid-cols-3 lg:grid-cols-5">
                     {/* Placeholder products for now */}
