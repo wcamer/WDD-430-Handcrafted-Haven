@@ -1,0 +1,18 @@
+
+/* .form{
+    background-color: pink;
+} */
+.submitBtn{
+    background-color: #fb8500;
+    display: block;
+    text-align: center;
+    justify-content: center;
+    padding: 2rem;
+    margin: .75rem;
+    border-radius: .5rem;
+}
+
+.submitBtn:hover{
+    background-color: #ffb703;
+    transition: background-color ease-in-out 0.25s;
+}
