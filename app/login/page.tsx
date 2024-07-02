@@ -1,4 +1,4 @@
-// import Header from '../ui/header'
+
 import Header from '../ui/header';
 import Footer from '../ui/footer'
 import LoginForm from '../ui/components/login-form';
@@ -15,7 +15,7 @@ export default function Page() {
 
      
       <div className='flex justify-center p-2 m-2'>
-            <p>Don't have an account with us?<Link href='/register'> Click here to Register</Link></p>
+            <p>Need to make an account?<Link href='/register'> Click here to Register</Link></p>
       </div>
       <Footer />
     </main>
