@@ -4,9 +4,10 @@ export function LeftArrow(){
     return(
         
     
-    <div className="flex justify-center items-center ">
+    // <div className="flex justify-center items-center ">
+    <div>
     {/* <div> */}
-      <ArrowLeftIcon className="h-6 w-6 text-gray-500 outline" />
+      <ArrowLeftIcon className="h-6 w-6 text-black outline" />
     </div>
   
 
@@ -18,9 +19,10 @@ export function RightArrow(){
     return(
         
     
-    <div className="flex justify-center items-center ">
+    // <div className="flex justify-center items-center ">
+    <div>
     {/* // <div > */}
-      <ArrowRightIcon className="h-6 w-6 text-gray-500 outline" />
+      <ArrowRightIcon className="h-6 w-6 text-black outline" />
     </div>
   
 
