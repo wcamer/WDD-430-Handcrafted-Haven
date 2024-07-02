@@ -137,7 +137,7 @@ export default function ProductListing() {
       </div>
 
       <div className={` col-end-5 lg:col-start-2  `}>
-        <article className="m-2 grid grid-cols-2 gap-4 p-2  md:grid-cols-3 lg:grid-cols-5">
+        <article className="m-2 grid  gap-4 p-2 sm:grid-cols-1  md:grid-cols-3 lg:grid-cols-5">
           {handicraftProducts.map((product: Product) => {
             return (
               <ProductDisplay
