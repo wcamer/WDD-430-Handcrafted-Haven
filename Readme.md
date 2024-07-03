@@ -5,7 +5,7 @@ This is just a bunch of fill text that will be removed
 ### Group Members
 
 - William Cameron
-- K3vin
+- Kevin Morales
 - Alv&r000
 - Eric
 - Martin Sander
