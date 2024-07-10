@@ -142,7 +142,7 @@ export default async function SellerProfile(){
                     height={200}
                     alt="placeholder image"
                 />
-                <h1 className={`${Seller.sellerName}`}>Seller's Name</h1>
+                <h1 className={`${Seller.sellerName}`}>Sellers Name</h1>
                 
             </div>
 
