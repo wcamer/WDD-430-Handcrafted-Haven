@@ -1,0 +1,53 @@
+.sellerName{
+    font-size: 2.2rem;
+}
+
+.sellerStory{
+    background-color: pink;
+    padding: 1.1rem;
+    margin: 1.1rem;
+    border: solid black 2px;
+}
+
+.sellerStory h2{
+    font-size: 2rem;
+    text-align: center;
+    padding: 1.1rem;
+}
+
+.sellerStory p {
+    font-size: 1.3rem;
+}
+
+.sellerReview{
+    background-color: green;
+    padding: 1.1rem;
+    margin: 1.1rem;
+    border: solid black 2px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.sellerReview h2{
+    font-size: 2rem;
+}
+.sellerReview p{
+    font-size: 1.8rem;
+}
+
+.sellerProducts{
+    background-color: aqua;
+    padding: 1.1rem;
+    margin: 1.1rem;
+    border: solid black 2px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+   
+}
+
+.sellerProducts h2{
+    font-size: 2rem;
+    padding: 1.1rem;
+}
