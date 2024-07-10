@@ -4,7 +4,7 @@ import ProductDisplay from './product-display';
 import { LeftArrow, RightArrow } from './arrows';
 import { ProductFilterButtons } from './product-filter';
 import Home from '@/app/ui/home-page.module.css';
-import clsx from 'clsx';
+// import clsx from 'clsx';
 import { useState } from 'react';
 import { string } from 'zod';
 
