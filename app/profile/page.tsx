@@ -14,7 +14,7 @@ export default  function Page() {
       
       <Header />
       <h1>Profile Page</h1>
-      {/* <SellerProfile /> */}
+      <SellerProfile />
       <CustomerProfile />
      
       
