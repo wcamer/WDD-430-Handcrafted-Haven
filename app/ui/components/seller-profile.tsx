@@ -148,7 +148,7 @@ export default async function SellerProfile(){
 
             <article className={`${Seller.sellerStory}` }>
                 <h2>My Story</h2>
-                <p>Lena, a passionate crafter, opened an Etsy store to share her handmade jewelry. Each piece, inspired by nature, told a unique story. Customers adored her intricate designs and heartfelt notes. As orders poured in, Lena's little shop thrived, turning her hobby into a blossoming, joyful business.</p>
+                <p>Lena, a passionate crafter, opened an Etsy store to share her handmade jewelry. Each piece, inspired by nature, told a unique story. Customers adored her intricate designs and heartfelt notes. As orders poured in, Lena little shop thrived, turning her hobby into a blossoming, joyful business.</p>
 
             </article>
 
