@@ -4,14 +4,23 @@ export const users = [
     user_name: 'evan01',
     user_email: 'evan01@gmail.com',
     user_password: 'evanPass12345!',
+    user_city:"Quito", 
+    user_state: "Pichincha",
+    user_address: "Galte y Alberto Spencer", 
+    user_zip: "171101"
   },
   {
     user_id: 'bedfe120-7bff-4d8a-b5a8-5b2644d2b57c',
     user_name: 'dill02',
     user_email: 'dill02@gmail.com',
     user_password: 'dillPass12345!',
+    user_city:"Guayaquil", 
+    user_state: "Guayas",
+    user_address: "Calle el Robo y Delicuencia", 
+    user_zip: "171101"
   },
 ];
+
 
 export const sellers = [
   {
@@ -19,12 +28,20 @@ export const sellers = [
     seller_name: 'gideon03',
     seller_email: 'gideon03@gmail.com',
     seller_password: 'gidPass',
+     seller_city:"Guayaquil", 
+     seller_state: "Guayas",
+     seller_address: "Calle el Robo y Delicuencia", 
+     seller_zip: "171101"
   },
   {
     seller_id: 'a2e3b796-f4de-48e4-b97c-bb2c5f70a0bc',
     seller_name: 'nala04',
     seller_email: 'nala04@gmail.com',
     seller_password: 'nalaPass',
+     seller_city:"Quito", 
+     seller_state: "Pichincha",
+     seller_address: "Galte y Alberto Spencer", 
+     seller_zip: "171101"
   },
 ];
 

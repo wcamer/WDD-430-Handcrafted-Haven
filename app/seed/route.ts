@@ -4,6 +4,27 @@ import { buying_history, cart_products, products, reviews, sellers, users } from
 
 const client = await db.connect();
 
+async function cleanDB() {
+  const tablesToDelete = ['users', 'sellers', 'products', 'reviews', 'cart_products', 'buying_history'];
+try {
+    await client.sql`DROP TABLE IF EXISTS users CASCADE`;
+    console.log(`Table users deleted`);
+    await client.sql`DROP TABLE IF EXISTS sellers CASCADE`;
+    console.log(`Table sellers deleted`);
+    await client.sql`DROP TABLE IF EXISTS products CASCADE`;
+    console.log(`Table products deleted`);
+    await client.sql`DROP TABLE IF EXISTS reviews CASCADE`;
+    console.log(`Table reviews deleted`);
+    await client.sql`DROP TABLE IF EXISTS cart_products CASCADE`;
+    console.log(`Table cart_products deleted`);
+    await client.sql`DROP TABLE IF EXISTS buying_history CASCADE`;
+    console.log(`Table buying_history deleted`);
+} catch (error) {
+  console.log("clean db ", error)
+}
+  
+}
+
 async function seedUsers() {
   await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
   await client.sql`
@@ -11,7 +32,11 @@ async function seedUsers() {
       user_id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
       user_name VARCHAR(255) NOT NULL,
       user_email TEXT NOT NULL UNIQUE,
-      user_password TEXT NOT NULL
+      user_password TEXT NOT NULL,
+      user_city TEXT NOT NULL,
+      user_state TEXT NOT NULL,
+      user_address TEXT NOT NULL,
+      user_zip TEXT NOT NULL
     );
   `;
 
@@ -19,9 +44,9 @@ async function seedUsers() {
     users.map(async (user) => {
       const hashedPassword = await bcrypt.hash(user.user_password, 10);
       return client.sql`
-        INSERT INTO users (user_id, user_name, user_email, user_password)
-        VALUES (${user.user_id}, ${user.user_name}, ${user.user_email}, ${hashedPassword})
-        ON CONFLICT (user_id) DO NOTHING;
+        INSERT INTO users (user_id, user_name, user_email, user_password, user_city, user_state, user_address, user_zip)
+        VALUES (${user.user_id}, ${user.user_name}, ${user.user_email}, ${hashedPassword}, ${user.user_city}, ${user.user_state}, ${user.user_address}, ${user.user_zip})
+        ON CONFLICT (user_id) DO NOTHING
       `;
     }),
   );
@@ -36,7 +61,11 @@ async function seedSellers() {
     seller_id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
     seller_name VARCHAR(255) NOT NULL,
     seller_email TEXT NOT NULL UNIQUE,
-    seller_password TEXT NOT NULL
+    seller_password TEXT NOT NULL,
+    seller_city TEXT NOT NULL,
+    seller_state TEXT NOT NULL,
+    seller_address TEXT NOT NULL,
+    seller_zip TEXT NOT NULL
   )`;
 
   const insertedSellers = await Promise.all(
@@ -44,8 +73,8 @@ async function seedSellers() {
     sellers.map(async (seller) => {
       const hashedPassword = await bcrypt.hash(seller.seller_password, 10);
       return client.sql`
-      INSERT INTO sellers (seller_id, seller_name, seller_email, seller_password)
-      VALUES (${seller.seller_id}, ${seller.seller_name}, ${seller.seller_email}, ${hashedPassword})
+      INSERT INTO sellers (seller_id, seller_name, seller_email, seller_password, seller_city, seller_state, seller_address, seller_zip)
+      VALUES (${seller.seller_id}, ${seller.seller_name}, ${seller.seller_email}, ${hashedPassword}, ${seller.seller_city}, ${seller.seller_state}, ${seller.seller_address}, ${seller.seller_zip})
         ON CONFLICT (seller_id) DO NOTHING;`})
   );
 
@@ -195,11 +224,14 @@ async function seedBuyingHistory() {
 export async function GET() {
   try {
     await client.sql`BEGIN`;
-    // await seedUsers();
-    // await seedSellers();
-    // await seedProducts();
-    // await seedReviews();
-    // await seedCarts();
+
+    // await cleanDB();
+    // await client.sql`COMMIT`;
+    await seedUsers();
+    await seedSellers();
+    await seedProducts();
+    await seedReviews();
+    await seedCarts();
     await seedBuyingHistory();
     await client.sql`COMMIT`;
 
