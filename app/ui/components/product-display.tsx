@@ -4,16 +4,23 @@ import Image from 'next/image';
 import Products from '@/app/ui/products.module.css';
 
 // placeholder test code below
-export default function ProductDisplay(props: any) {
+export default function ProductDisplay(props: {
+  id: String;
+  name: String;
+  price: number;
+  rating: number;
+  imageUrl: String;
+}) {
+  console.log(props);
   return (
-    <section className={`${Products.prodCont}`} key={props.id}>
+    <section className={`${Products.prodCont}`}>
       <div className="flex justify-center p-0">
-        <Link href={props.link}>
+        <Link href={`./${props.id}`}>
           <Image
             src={props.imageUrl}
             width={600}
             height={600}
-            alt={props.imageAlt}
+            alt={props.name}
           />
         </Link>
       </div>
@@ -23,7 +30,7 @@ export default function ProductDisplay(props: any) {
           Price: $<span>{props.price}</span>
         </p>
         <p>
-          Rating: <span>{props.rating}</span>
+          Rating: <span>{`${props.rating}`}</span>
         </p>
       </div>
       <div className="text-center">
