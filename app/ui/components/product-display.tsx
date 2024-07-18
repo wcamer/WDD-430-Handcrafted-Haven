@@ -5,13 +5,12 @@ import Products from '@/app/ui/products.module.css';
 
 // placeholder test code below
 export default function ProductDisplay(props: {
-  id: String;
-  name: String;
+  id: string;
+  name: string;
   price: number;
   rating: number;
-  imageUrl: String;
+  imageUrl: string;
 }) {
-  console.log(props);
   return (
     <section className={`${Products.prodCont}`}>
       <div className="flex justify-center p-0">

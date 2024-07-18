@@ -1,48 +1,49 @@
 export type User = {
-  user_id: String;
-  user_name: String;
-  user_email: String;
-  user_password: String;
-  date_created: String;
+  user_id: string;
+  user_name: string;
+  user_email: string;
+  user_password: string;
 };
 
 export type Seller = {
-  seller_id: String;
-  seller_name: String;
-  seller_email: String;
-  seller_password: String;
-  date_created: String;
+  seller_id: string;
+  seller_name: string;
+  seller_email: string;
+  seller_description: string;
+  seller_password: string;
 };
 
 export type Product = {
-  seller_id: String; // KEY
-  product_id: String; // KEY
-  product_name: String;
-  product_description: String;
-  product_rating: Number;
-  product_price: Number;
-  product_thumbnail: String;
-  product_image: String;
-  date_added: String;
+  seller_id: string; // KEY
+  product_id: string; // KEY
+  product_name: string;
+  product_description: string;
+  product_rating: number;
+  product_price: number;
+  product_thumbnail: string;
+  product_image: string;
+  date_added: string;
 };
 
 export type Review = {
-  review_id: String; // KEY
-  user_id: String; // KEY
+  review_id: string; // KEY
+  user_id: string; // KEY
   product_id: String; // KEY
-  review_description: String;
-  review_rating: Number;
-  date_added: String;
+  review_description: string;
+  review_rating: number;
+  date_added: string;
 };
 
 export type CartProduct = {
-  user_id: String; // KEY
-  product_id: String; // KEY
-  date_added: String;
+  cart_id: string; // KEY
+  user_id: string; // KEY
+  product_id: string; // KEY
+  date_added: string;
 };
 
 export type UserBuyingHistory = {
-  user_id: String; // KEY
-  product_id: String; // KEY
-  date_ordered: String;
+  history_id: string; // KEY
+  user_id: string; // KEY
+  product_id: string; // KEY
+  date_ordered: string;
 };

@@ -5,7 +5,6 @@ const ITEMS_PER_PAGE = 10;
 export async function fetchProductPageCount() {
   try {
     const count = await sql`SELECT COUNT(*) FROM products;`;
-    console.log(count);
 
     const totalPages = Math.ceil(Number(count.rows[0].count) / ITEMS_PER_PAGE);
     return totalPages;

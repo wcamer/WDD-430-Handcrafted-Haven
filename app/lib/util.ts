@@ -1,5 +1,10 @@
 import { sql } from '@vercel/postgres';
-import { Product } from '@/app/lib/database-definitions';
+import {
+  CartProduct,
+  Product,
+  Review,
+  UserBuyingHistory,
+} from '@/app/lib/database-definitions';
 
 export async function fetchProducts() {
   try {
@@ -7,106 +12,42 @@ export async function fetchProducts() {
     return data.rows;
   } catch (error) {
     console.error('Database Error:', error);
-    throw new Error('Failed to fetch revenue data.');
+    throw new Error('Failed to fetch products data.');
   }
 }
 
-export async function fetchProductAscending() {}
-
-export async function fetchProductDescending() {}
-
-export async function fetchProductByRating() {}
-
-export async function fetchProductsAToZ() {
-  console.log('getting all products A-Z');
-
-  // const results = await sql(
-  //     'SELECT * FROM products ORDER BY product_name ASC '
-  // )
-
-  // return results.rows
-
-  const results = [
-    {
-      name: 'ph1',
-      price: '1000',
-      rating: '7.9',
-      src: '/images/600x600ph.jpg',
-      alt: 'placeholder image',
-    },
-    {
-      name: 'ph2',
-      price: '1000',
-      rating: '7.9',
-      src: '/images/600x600ph.jpg',
-      alt: 'placeholder image',
-    },
-    {
-      name: 'ph3',
-      price: '1000',
-      rating: '7.9',
-      src: '/images/600x600ph.jpg',
-      alt: 'placeholder image',
-    },
-    {
-      name: 'ph4',
-      price: '1000',
-      rating: '7.9',
-      src: '/images/600x600ph.jpg',
-      alt: 'placeholder image',
-    },
-    {
-      name: 'ph5',
-      price: '1000',
-      rating: '7.9',
-      src: '/images/600x600ph.jpg',
-      alt: 'placeholder image',
-    },
-    {
-      name: 'ph6',
-      price: '1000',
-      rating: '7.9',
-      src: '/images/600x600ph.jpg',
-      alt: 'placeholder image',
-    },
-    {
-      name: 'ph7',
-      price: '1000',
-      rating: '7.9',
-      src: '/images/600x600ph.jpg',
-      alt: 'placeholder image',
-    },
-    {
-      name: 'ph8',
-      price: '1000',
-      rating: '7.9',
-      src: '/images/600x600ph.jpg',
-      alt: 'placeholder image',
-    },
-    {
-      name: 'ph9',
-      price: '1000',
-      rating: '7.9',
-      src: '/images/600x600ph.jpg',
-      alt: 'placeholder image',
-    },
-    {
-      name: 'ph10',
-      price: '1000',
-      rating: '7.9',
-      src: '/images/600x600ph.jpg',
-      alt: 'placeholder image',
-    },
-  ];
-
-  return results;
+export async function fetchReviews(product_id: string) {
+  try {
+    const data =
+      await sql<Review>`SELECT * from reviews WHERE product_id = ${product_id};`;
+    return data.rows;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch reviews data.');
+  }
 }
 
-export async function fetchProductsByPrice() {}
+export async function fetchCart(user_id: string) {
+  try {
+    const data =
+      await sql<CartProduct>`SELECT * from cart_products WHERE user_id = ${user_id};`;
+    return data.rows;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch cart_products data.');
+  }
+}
 
-export async function fetchByCategory() {}
-
-export async function fetchByMostRecent() {}
+export async function fetchUserBuyingHistory(user_id: string) {
+  try {
+    const data =
+      await sql<UserBuyingHistory>`SELECT * from buying_history WHERE user_id = ${user_id};`;
+    return data.rows;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch buying_history data.');
+  }
+}
 
 // Pagination
 export const generatePagination = (currentPage: number, totalPages: number) => {
