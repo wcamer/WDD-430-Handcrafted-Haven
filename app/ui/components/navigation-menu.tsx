@@ -17,20 +17,11 @@ export default function NavigationMenu(navigationMenu: NavigationMenue) {
     'hidden',
     `fixed grid ${Spacer.spacer} py-4 top-[5rem] right-0 rounded-bl-lg`,
   ];
-
-  const [isFullNav, setIsFullNav] = useState(false);
   const [menuState, setMenuState] = useState(0);
-
-  useEffect(() => {
-    setIsFullNav(window.innerWidth >= 640);
-    window.addEventListener('resize', () => {
-      setIsFullNav(window.innerWidth >= 640);
-    });
-  }, []);
 
   return (
     <>
-      <nav className={isFullNav ? '' : menuStateOptions[menuState]}>
+      <nav className={menuStateOptions[menuState]}>
         <Link
           className={`${Navigation.navLink} hover:${Navigation.navLinkHover}`}
           href="/"
@@ -39,9 +30,15 @@ export default function NavigationMenu(navigationMenu: NavigationMenue) {
         </Link>
         <Link
           className={`${Navigation.navLink} hover:${Navigation.navLinkHover}`}
-          href="/stories"
+          href="/profile"
         >
-          Stories
+          Profile
+        </Link>
+        <Link
+          className={`${Navigation.navLink} hover:${Navigation.navLinkHover}`}
+          href="/products/manage"
+        >
+          Manage Products
         </Link>
         <Link
           className={`${Navigation.navLink} hover:${Navigation.navLinkHover}`}
@@ -59,14 +56,12 @@ export default function NavigationMenu(navigationMenu: NavigationMenue) {
           </Link>
         )}
       </nav>
-      {!isFullNav && (
-        <Bars3Icon
-          className={Navigation.hambMenu}
-          onClick={() => {
-            setMenuState(menuState ^ 1);
-          }}
-        />
-      )}
+      <Bars3Icon
+        className={Navigation.hambMenu}
+        onClick={() => {
+          setMenuState(menuState ^ 1);
+        }}
+      />
     </>
   );
 }

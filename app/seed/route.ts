@@ -1,6 +1,13 @@
 import bcrypt from 'bcrypt';
 import { db } from '@vercel/postgres';
-import { buying_history, cart_products, products, reviews, sellers, users } from '../lib/placeholder-data';
+import {
+  buying_history,
+  cart_products,
+  products,
+  reviews,
+  sellers,
+  users,
+} from '../lib/placeholder-data';
 
 const client = await db.connect();
 
@@ -31,22 +38,23 @@ async function seedUsers() {
 
 async function seedSellers() {
   await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
-  
+
   await client.sql`CREATE TABLE IF NOT EXISTS sellers (
     seller_id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
     seller_name VARCHAR(255) NOT NULL,
     seller_email TEXT NOT NULL UNIQUE,
+    seller_description TEXT,
     seller_password TEXT NOT NULL
   )`;
 
   const insertedSellers = await Promise.all(
-    
     sellers.map(async (seller) => {
       const hashedPassword = await bcrypt.hash(seller.seller_password, 10);
       return client.sql`
-      INSERT INTO sellers (seller_id, seller_name, seller_email, seller_password)
-      VALUES (${seller.seller_id}, ${seller.seller_name}, ${seller.seller_email}, ${hashedPassword})
-        ON CONFLICT (seller_id) DO NOTHING;`})
+      INSERT INTO sellers (seller_id, seller_name, seller_email, seller_description, seller_password)
+      VALUES (${seller.seller_id}, ${seller.seller_name}, ${seller.seller_email}, ${seller.seller_description}, ${hashedPassword})
+        ON CONFLICT (seller_id) DO NOTHING;`;
+    }),
   );
 
   return insertedSellers;
@@ -58,29 +66,33 @@ async function seedProducts() {
   await client.sql`
   CREATE TABLE IF NOT EXISTS products (
     product_id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
-    seller_id UUID REFERENCES sellers (seller_id),
+    seller_id UUID REFERENCES sellers (seller_id) ON DELETE CASCADE,
+    product_name TEXT NOT NULL,
     product_description TEXT,
     product_rating INT,
     product_price INT,
     product_thumbnail VARCHAR(255),
-    product_image VARCHAR(255)
+    product_image VARCHAR(255),
+    date_added DATE
   );`;
 
   const insertedProducts = await Promise.all(
-    
     products.map((product) => {
       return client.sql`
-      INSERT INTO products (product_id, seller_id, product_description, product_rating, product_price, product_thumbnail, product_image)
+      INSERT INTO products (product_id, seller_id, product_name, product_description, product_rating, product_price, product_thumbnail, product_image, date_added)
       VALUES (
       ${product.product_id},
       (SELECT seller_id FROM sellers WHERE seller_id = ${product.seller_id}),
+      ${product.product_name},
       ${product.product_description},
       ${product.product_rating},
       ${product.product_price},
       ${product.product_thumbnail},
-      ${product.product_image}
+      ${product.product_image},
+      current_date
       )
-        ON CONFLICT (product_id) DO NOTHING;`})
+        ON CONFLICT (product_id) DO NOTHING;`;
+    }),
   );
 
   return insertedProducts;
@@ -91,15 +103,14 @@ async function seedReviews() {
 
   await client.sql`CREATE TABLE IF NOT EXISTS reviews (
     review_id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
-    product_id UUID REFERENCES products (product_id),
-    user_id UUID REFERENCES users (user_id),
+    product_id UUID REFERENCES products (product_id) ON DELETE CASCADE,
+    user_id UUID REFERENCES users (user_id) ON DELETE CASCADE,
     review_description TEXT,
     review_rating INT NOT NULL,
     date_added DATE
   );`;
 
   const insertedReviews = await Promise.all(
-    
     reviews.map(async (review) => {
       return client.sql`
       INSERT INTO reviews (
@@ -118,7 +129,8 @@ async function seedReviews() {
         ${review.review_rating},
         current_date
       )
-        ON CONFLICT (review_id) DO NOTHING;`})
+        ON CONFLICT (review_id) DO NOTHING;`;
+    }),
   );
 
   return insertedReviews;
@@ -126,17 +138,16 @@ async function seedReviews() {
 
 async function seedCarts() {
   await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
-  
+
   await client.sql`CREATE TABLE IF NOT EXISTS cart_products (
     cart_id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
-    product_id UUID REFERENCES products (product_id),
-    user_id UUID REFERENCES users (user_id),
+    product_id UUID REFERENCES products (product_id) ON DELETE CASCADE,
+    user_id UUID REFERENCES users (user_id) ON DELETE CASCADE,
     product_amount INT,
     date_added DATE
-  );`
+  );`;
 
   const insertedCarts = await Promise.all(
-    
     cart_products.map(async (cart) => {
       return client.sql`
       INSERT INTO cart_products (
@@ -151,7 +162,8 @@ async function seedCarts() {
         ${cart.product_amount},
         current_date
       )
-        ON CONFLICT (cart_id) DO NOTHING;`})
+        ON CONFLICT (cart_id) DO NOTHING;`;
+    }),
   );
 
   return insertedCarts;
@@ -162,8 +174,8 @@ async function seedBuyingHistory() {
 
   await client.sql`CREATE TABLE IF NOT EXISTS buying_history (
     history_id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
-    product_id UUID REFERENCES products (product_id),
-    user_id UUID REFERENCES users (user_id),
+    product_id UUID REFERENCES products (product_id) ON DELETE CASCADE,
+    user_id UUID REFERENCES users (user_id) ON DELETE CASCADE,
     product_amount INT,
     date_added DATE
   );`;
@@ -191,15 +203,14 @@ async function seedBuyingHistory() {
   return insertedBuyingHistory;
 }
 
-
 export async function GET() {
   try {
     await client.sql`BEGIN`;
-    // await seedUsers();
-    // await seedSellers();
-    // await seedProducts();
-    // await seedReviews();
-    // await seedCarts();
+    await seedUsers();
+    await seedSellers();
+    await seedProducts();
+    await seedReviews();
+    await seedCarts();
     await seedBuyingHistory();
     await client.sql`COMMIT`;
 
