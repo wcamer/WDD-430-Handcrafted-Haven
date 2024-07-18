@@ -18,7 +18,11 @@ async function seedUsers() {
       user_id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
       user_name VARCHAR(255) NOT NULL,
       user_email TEXT NOT NULL UNIQUE,
-      user_password TEXT NOT NULL
+      user_password TEXT NOT NULL,
+      user_city TEXT NOT NULL,
+      user_state TEXT NOT NULL,
+      user_address TEXT NOT NULL,
+      user_zip TEXT NOT NULL
     );
   `;
 
@@ -26,8 +30,26 @@ async function seedUsers() {
     users.map(async (user) => {
       const hashedPassword = await bcrypt.hash(user.user_password, 10);
       return client.sql`
-        INSERT INTO users (user_id, user_name, user_email, user_password)
-        VALUES (${user.user_id}, ${user.user_name}, ${user.user_email}, ${hashedPassword})
+        INSERT INTO users (
+          user_id,
+          user_name,
+          user_email,
+          user_password,
+          user_city,
+          user_state,
+          user_address,
+          user_zip
+        )
+        VALUES (
+          ${user.user_id},
+          ${user.user_name},
+          ${user.user_email},
+          ${hashedPassword},
+          ${user.user_city},
+          ${user.user_state},
+          ${user.user_address},
+          ${user.user_zip}
+        )
         ON CONFLICT (user_id) DO NOTHING;
       `;
     }),
@@ -44,15 +66,39 @@ async function seedSellers() {
     seller_name VARCHAR(255) NOT NULL,
     seller_email TEXT NOT NULL UNIQUE,
     seller_description TEXT,
-    seller_password TEXT NOT NULL
+    seller_password TEXT NOT NULL,
+    seller_city TEXT NOT NULL,
+    seller_state TEXT NOT NULL,
+    seller_address TEXT NOT NULL,
+    seller_zip TEXT NOT NULL
   )`;
 
   const insertedSellers = await Promise.all(
     sellers.map(async (seller) => {
       const hashedPassword = await bcrypt.hash(seller.seller_password, 10);
       return client.sql`
-      INSERT INTO sellers (seller_id, seller_name, seller_email, seller_description, seller_password)
-      VALUES (${seller.seller_id}, ${seller.seller_name}, ${seller.seller_email}, ${seller.seller_description}, ${hashedPassword})
+      INSERT INTO sellers (
+        seller_id,
+        seller_name,
+        seller_email,
+        seller_description,
+        seller_password,
+        seller_city,
+        seller_state,
+        seller_address,
+        seller_zip
+      )
+      VALUES (
+        ${seller.seller_id},
+        ${seller.seller_name},
+        ${seller.seller_email},
+        ${seller.seller_description},
+        ${hashedPassword},
+        ${seller.seller_city},
+        ${seller.seller_state},
+        ${seller.seller_address},
+        ${seller.seller_zip}
+      )
         ON CONFLICT (seller_id) DO NOTHING;`;
     }),
   );

@@ -3,6 +3,10 @@ export type User = {
   user_name: string;
   user_email: string;
   user_password: string;
+  user_city: string;
+  user_state: string;
+  user_address: string;
+  user_zip: string;
 };
 
 export type Seller = {
@@ -11,6 +15,10 @@ export type Seller = {
   seller_email: string;
   seller_description: string;
   seller_password: string;
+  seller_city: string;
+  seller_state: string;
+  seller_address: string;
+  seller_zip: string;
 };
 
 export type Product = {

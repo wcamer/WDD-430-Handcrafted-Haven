@@ -4,12 +4,20 @@ export const users = [
     user_name: 'evan01',
     user_email: 'evan01@gmail.com',
     user_password: 'evanPass12345!',
+    user_city: 'Chicago',
+    user_state: 'IL',
+    user_address: '5678 Michigan Ave',
+    user_zip: '60611',
   },
   {
     user_id: 'bedfe120-7bff-4d8a-b5a8-5b2644d2b57c',
     user_name: 'dill02',
     user_email: 'dill02@gmail.com',
     user_password: 'dillPass12345!',
+    user_city: 'San Francisco',
+    user_state: 'CA',
+    user_address: '1234 Market St',
+    user_zip: '94103',
   },
 ];
 
@@ -20,6 +28,10 @@ export const sellers = [
     seller_email: 'gideon03@gmail.com',
     seller_description: 'This is a description',
     seller_password: 'gidPass',
+    seller_city: 'Austin',
+    seller_state: 'TX',
+    seller_address: '9101 Congress Ave',
+    seller_zip: '78701',
   },
   {
     seller_id: 'a2e3b796-f4de-48e4-b97c-bb2c5f70a0bc',
@@ -27,6 +39,10 @@ export const sellers = [
     seller_email: 'nala04@gmail.com',
     seller_description: 'This is a description',
     seller_password: 'nalaPass',
+    seller_city: 'Miami',
+    seller_state: 'FL',
+    seller_address: '2345 Biscayne Blvd',
+    seller_zip: '33137',
   },
 ];
 
