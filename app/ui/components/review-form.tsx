@@ -2,7 +2,7 @@
 
 import Highlight from '@/app/ui/product-highlight.module.css'
 import { setUserProdRating } from '@/app/lib/util';
-import { useState } from "react";
+import { useState, useActionState } from "react";
  
 interface User {
     user_id: string;
@@ -14,15 +14,32 @@ interface Product {
  
  
  export function ReviewForm({product, user}: {product: any, user: any} ){
-    const [reviewRating, setReviewRating] = useState('')
+    const [reviewRating, setReviewRating] = useState('') 
     const [reviewDesc, setReviewDesc] = useState('')
 
-    const handleSubmit =  (e: any)  =>{
-        e.preventDefault();
-        const userId =  user.user_id// 'insert user id here'
-        const productId = product.product_id //'insert prod id here'
-        setUserProdRating(userId, productId, reviewRating, reviewDesc)
-    }
+    const userId = user.user_id
+    console.log('here is userId in the review formmmmmmmmmmmmmmmmm', userId)
+    const productId = product.product_id
+    const settingUserProdRating = setUserProdRating
+                .bind(
+                    null,
+                    userId,
+                    productId,
+                    reviewRating,
+                    reviewDesc
+
+                )
+
+    const initialState: any = { message: null, errors: {} };
+    const[state, formAction] = useActionState(settingUserProdRating, initialState)
+
+    
+    // const handleSubmit =  (e: any)  =>{
+    //     e.preventDefault();
+    //     const userId =  user.user_id// 'insert user id here'
+    //     const productId = product.product_id //'insert prod id here'
+    //     setUserProdRating(userId, productId, reviewRating, reviewDesc)
+    // }
 
 
 
@@ -33,7 +50,8 @@ interface Product {
  <section className={`${Highlight.rating} p-2 m-2 outline md: col-start-2 row-start-2`}>
 {/* <section> */}
                 <form className={`${Highlight.ratingForm}`}
-                onSubmit={handleSubmit}
+                // onSubmit={handleSubmit}
+                action={formAction}
                 >
                     <fieldset className="flex flex-col ">
                         <legend className="text-2xl text-center">Leave A Review</legend><br></br>
