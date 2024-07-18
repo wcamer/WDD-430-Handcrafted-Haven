@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useActionState } from "react"
+// import { useState, useActionState } from "react"
 
 import PE from '@/app/ui/product-edit.module.css'
 import { deleteProduct } from "@/app/lib/util"
@@ -24,16 +24,16 @@ export function DeleteProductForm({product, user}: {product: any, user: any}){
 
 
     //something new
-    const initialState: any = { message: null, errors: {} };
+    // const initialState: any = { message: null, errors: {} };
     const deletedProduct = deleteProduct.bind(null,
                             product.product_id,
                             user.user_id
 
                         )
 
-    const[state, formAction] = useActionState(deletedProduct, initialState)
+    // const[state, formAction] = useActionState(deletedProduct, initialState)
 
-    
+    const formAction = deletedProduct
 
     return (
         <form 

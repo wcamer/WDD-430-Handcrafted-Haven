@@ -1,7 +1,7 @@
 'use client'
 
 import PE from '@/app/ui/product-edit.module.css' // will be changed
-import { useState , useActionState} from 'react'
+import { useState } from 'react'
 import { createNewProdcut } from '@/app/lib/util'
 
 
@@ -29,8 +29,9 @@ export function NewProductForm({seller}: {seller: string}){
 
                                         )
 
-    const[state, formAction] = useActionState(createdProduct, initialState)
 
+    // const[state, formAction] = useActionState(createdProduct, initialState)
+    const formAction = createdProduct
 
     // const handleSubmit = (e: any) =>{
     //     e.preventDefault()

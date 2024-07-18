@@ -2,7 +2,7 @@
 
 import Highlight from '@/app/ui/product-highlight.module.css'
 import { setUserProdRating } from '@/app/lib/util';
-import { useState, useActionState } from "react";
+import { useState } from "react";
  
 interface User {
     user_id: string;
@@ -31,8 +31,8 @@ interface Product {
                 )
 
     const initialState: any = { message: null, errors: {} };
-    const[state, formAction] = useActionState(settingUserProdRating, initialState)
-
+    // const[state, formAction] = useActionState(settingUserProdRating, initialState)
+        const formAction = settingUserProdRating
     
     // const handleSubmit =  (e: any)  =>{
     //     e.preventDefault();
