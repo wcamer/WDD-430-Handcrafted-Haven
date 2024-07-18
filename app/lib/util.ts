@@ -303,8 +303,8 @@ export async function deleteProduct(
                                 WHERE product_id=${product_id} AND seller_id=${seller_id};`
     console.log('FROM DELELTE PRODUCT...:\nHere is the product in the product table...',product.rows)
     
-    // await sql`DELETE FROM products 
-    //           WHERE product_id=${product_id} AND seller_id=${seller_id};`
+    await sql`DELETE FROM products 
+              WHERE product_id=${product_id} AND seller_id=${seller_id};`
 
     const products = await sql`SELECT * FROM products;`
     console.log('from DELETEPRODUCT...:\nhere are all the products...',products.rows)
