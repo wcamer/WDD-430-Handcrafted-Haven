@@ -14,7 +14,7 @@ interface Product {
     // id: string;
     // sellerName: string;
     // imageAlt: string;
-
+    product_name: string;
     product_description: string;
     product_rating: string;
     product_price: string;
@@ -25,10 +25,13 @@ interface Product {
      
     
   }
+interface User{
+    user_id: string;
+}
 
 
 
-export default async function ProductHighlight({product}: {product: any}) {
+export default async function ProductHighlight({product, user}: {product: any, user: any}) {
     
     //   const handicraftProducts = [
     //     {
@@ -57,7 +60,7 @@ export default async function ProductHighlight({product}: {product: any}) {
 
         console.log('here is prod in the second productHighlight...', prod)
         
-        const prodName = 'this is a filler name'
+        const prodName = prod.product_name
         const sellerName = prod.sellerName // need to run a query or query for the object then break it down
         const price = prod.product_price
         const rating = prod.product_rating

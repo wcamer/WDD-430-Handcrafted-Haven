@@ -2,41 +2,53 @@
 import Header from '@/app/ui/header';
 import Footer from '@/app/ui/footer';
 import ProductHighlight from '@/app/ui/components/productHighlight';
-import { fetchProduct, fetchUser } from '@/app/lib/util';
+import { fetchProduct, fetchUser, checkSeller } from '@/app/lib/util';
 import { ProductEditForm } from '@/app/ui/components/product-edit-form';
-// import { Metadata } from 'next';
+import { Metadata } from 'next';
 import Highlight from '@/app/ui/product-highlight.module.css'
 import { notFound } from 'next/navigation';
 import { NewProductForm } from '@/app/ui/components/product-new-form';
 
-// export const metadata: Metadata = {
-//   title: 'Product Edit Page ',
-// };
+export const metadata: Metadata = {
+  title: 'Add New Product  ',
+};
 
-interface Product {
-    product_id: string;
-    product_description: string;
-    product_rating: string;
-    product_price: string;
-    product_image: string;
-    sellerName: string;
-    //product_name???
+// interface Product {
+//     product_id: string;
+//     product_description: string;
+//     product_rating: string;
+//     product_price: string;
+//     product_image: string;
+//     sellerName: string;
+//     //product_name???
 
-  }
+//   }
 
-interface User {
-    user_id: string | undefined;
+// interface User {
+//     user_id: string | undefined;
 
-}
+// }
 
 
 // interface PageParams{
 //     productId: string;
 //     userId?: string | null | undefined
 // }
-// export default async function Page({ params }: { params: {id: string, userId: string}}) {
-//     const id = params.id;
-//     console.log("!!!!!!!!!!!!!", params)
+export default async function Page({ params }: { params: {id: string, userId: string}}) {
+    // const id = params.id; // this will be for production
+    // let user_id = params.id
+    let user_id = 'b3a538e3-e006-4fbc-b334-f53d599ade77' // this is for testing
+    console.log("!!!!!!!!!!!!! in the product add", params.id)
+
+    if(params.id === undefined){
+
+      // notFound() // this will be for production
+      console.log('WARNING: This is a stand for the user_id', user_id)
+    }
+
+    
+    const account_type = await checkSeller(user_id)
+    console.log('here is account_type...', account_type)
 //     const someUser = 'bedfe120-7bff-4d8a-b5a8-5b2644d2b57cCC' // this will need to get the user is from session
 //     const [productData, userData] = await Promise.all([fetchProduct(id), fetchUser(someUser)])
     
@@ -167,7 +179,7 @@ interface User {
 
 ////////// below is just a structure
 
-export default function Page() {
+// export default function Page() {
  
 
 
@@ -178,12 +190,10 @@ return (
     <h1>New Product page</h1>
     <div className={`flex  justify-center` }>
       
-          
-    
+        
 
       <div className='  flex ' >
-          {/* <ReviewForm product={product} user={user} />  */}
-          <NewProductForm />
+          <NewProductForm seller={user_id}/>
       </div>
        
     

@@ -2,23 +2,24 @@
 import Header from '@/app/ui/header';
 import Footer from '@/app/ui/footer';
 import ProductHighlight from '@/app/ui/components/productHighlight';
-import { fetchProduct, fetchUser } from '@/app/lib/util';
-import { ReviewForm } from '@/app/ui/components/review-form';
+import { fetchProduct, fetchSeller } from '@/app/lib/util';
+import { DeleteProductForm } from '@/app/ui/components/product-delete-form';
 import { Metadata } from 'next';
 import Highlight from '@/app/ui/product-highlight.module.css'
 import { notFound } from 'next/navigation';
 
 export const metadata: Metadata = {
-  title: 'Product Page ',
+  title: 'Delete Product',
 };
 
 interface Product {
     product_id: string;
-    product_name: string
+    product_name: string;
     product_description: string;
     product_rating: string;
     product_price: string;
     product_image: string;
+    product_imageAlt: string;
     sellerName: string;
     
 
@@ -34,15 +35,19 @@ interface User {
 //     productId: string;
 //     userId?: string | null | undefined
 // }
-export default async function Page({ params }: { params: {id: string , userId: string}}) {
+export default async function Page({ params }: { params: {id: string, userId: string}}) {
     const id = params.id;
     console.log("!!!!!!!!!!!!!", params)
-    //// actual user should work
-    const someUser = 'bedfe120-7bff-4d8a-b5a8-5b2644d2b57c' // this will need to get the user is from session
+    ////acutal user  should be an error
+    // const someUser = 'bedfe120-7bff-4d8a-b5a8-5b2644d2b57c' //Good test example this will need to get the user is from session
     
-    //actual seller should give an error 
-    // const someUser = 'b3a538e3-e006-4fbc-b334-f53d599ade77'
-    const [productData, userData] = await Promise.all([fetchProduct(id), fetchUser(someUser)])
+    ////actual seller
+    const someUser = 'b3a538e3-e006-4fbc-b334-f53d599ade77'
+
+    ////error example
+    // const someUser = 'bedfe120-7bff-4d8a-b5a8-5b2644d2b57cCC' //BAD test example this will need to get the user is from session
+
+    const [productData, userData] = await Promise.all([fetchProduct(id), fetchSeller(someUser)])
     
     
 
@@ -75,36 +80,37 @@ export default async function Page({ params }: { params: {id: string , userId: s
     // const userInfo = await
 
     //////////////////test 2
-    // let user
-    // console.log('here is userData...', userData)
     let user: User= {
-      user_id: ''
+        user_id: ''
     }
+
+    console.log('here is userDataaa in deleteeeee...', userData)
+
     if(userData ==='0' || userData === undefined){
-      console.log('No users are logged in')
-      // let user: User ={
-      //     user_id: 'Not Logged In' 
-      // }
-      notFound()
-      user.user_id = 'No User is logged in'
+        console.log('No users are logged in')
+        // let user: User ={
+        //     user_id: 'Not Logged In' 
+        // }
+        notFound()
+        user.user_id = 'No User is logged in'
 
     } else {
-      // let user: User ={
-      //     user_id: userData.user_id 
-      // }
-      user.user_id = userData.user_id
-      console.log('weeeeeeeeeeee', user)
+        // let user: User ={
+        //     user_id: userData.user_id 
+        // }
+        user.user_id = userData.seller_id
 
-  }
-    
+    }
 
     // let user: User ={
     //     user_id: userData.user_id
     // }
 
+    console.log('here is user in the product id deleteeee page...', user)
+
     if(productData === '0'){
       notFound()
-  }
+    }
 
 
 
@@ -114,58 +120,48 @@ export default async function Page({ params }: { params: {id: string , userId: s
 
    
     
-    console.log('here is productData in product[id]page.......',productData
+    console.log('here is productData in product[id] deletepage.......',productData
         ,'\n here is user data....',userData
+        ,'\n here is user...', user
+        
     )
     
+
+    let productName = 'placeholder name' //productData.product_name 
+
     let product: Product = {
     product_id: id,
-    product_name: productData.product_name,
+    product_name: productData.product_name,//'filler name',
     product_description: productData.product_description,
     product_rating: productData.product_rating,
     product_price: productData.product_price,
     product_image: productData.product_image,
+    product_imageAlt: `This is an image of ${productName}`,
     sellerName: productData.sellerName
- 
+    
 
     }
 
    
-   
-
-    
-
-    
 
 
   return (
     <main className="h-[32rem]">
       
       <Header />
-      <h1>Product Page but for idddddddddddddddd</h1>
-      <div className={`outline p-2 m-2  md:grid grid-cols-5` }>
-        <div className='md:col-start-2 col-end-5'>
-            <ProductHighlight product={product} user={user}/>
-        </div>
-            
-      
+      <h1>Delete productttttt page</h1>
+      <div className={`flex  justify-center` }>
+       
 
-        <div className='p-2 m-2 md:col-start-2 col-end-5 row-start-2'>
-            <ReviewForm product={product} user={user} /> 
+        <div className='  flex ' >
+            <DeleteProductForm product={product} user={user}/>
         </div>
          
       
       </div>
 
 
-      {/* <ProductHighlight product={product}/>
-      <div className={`${Highlight.rating} p-2 m-2 outline md: col-start-2 row-start-2`}>
-
-      <div className={` p-2 m-2 md:flex justify-center`}>
-        <ReviewForm  />  
-      </div> */}
-      
-      
+    
       <Footer />
     </main>
   );
