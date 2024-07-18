@@ -1,0 +1,94 @@
+
+
+
+.prodImage{
+    display: flex;
+    justify-content: center;
+    /* padding: 2%;
+    margin: 2%;  */
+    /* border: solid black 4px; */
+    border-radius: .5rem;
+
+}
+
+
+
+.ProductInfoSection {
+    /* display: grid;
+    grid-template-columns: 1fr 1fr;
+    text-align: center;
+    border: solid black 5px; */
+
+
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+
+    padding: 2%;
+    margin: 2%;
+    border-radius: .5rem;
+
+
+    /* background-color: #023047; */
+    background-color: #219ebc;
+}
+
+.ProductInfoSection h1{
+    font-size: 2rem;
+    background-color: #ffb703;
+    border-radius: .5rem;
+}
+
+.ProductInfo{
+    grid-column: 1/3;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    text-align: center;
+    border-radius: .5rem;
+    
+    /* background-color: #8ecae6; */
+    background-color: #ffb703;
+  
+
+
+}
+
+.ProductInfo {
+    font-size: 1.5rem;
+}
+
+.addToCart , .submitBtn{
+    font-size: 1.5rem;
+    background-color: #8ecae6;
+    border-radius: .5rem;
+}
+
+.addToCart:hover , .submitBtn:hover{
+    background-color: #fb8500;
+
+}
+
+.rating{
+    background-color: #219ebc;
+    border-radius: .5rem;
+    padding: 2%;
+    margin: 2%;
+}
+
+.ratingForm{
+    background-color: #ffb703;
+    display: flex;
+    flex-direction: column;
+    border: solid black 4px;
+    border-radius: .5rem;
+    padding: 2%;
+    margin: 2%;
+    
+
+}
+
+
+/* 
+.ratingDesc{
+    background-color: #8ecae6;
+} */
