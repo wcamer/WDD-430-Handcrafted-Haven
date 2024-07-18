@@ -6,6 +6,9 @@ import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import bcrypt from 'bcrypt';
 import { v4 as uuidv4 } from 'uuid';
+//login
+import { signIn, signOut } from '@/auth';
+import { AuthError } from 'next-auth';
 
 const FormSchema = z.object({
   user_id: z.string(),
@@ -55,4 +58,47 @@ export async function createUser(formData: FormData) {
     //redirect user to invoices
     redirect('/successRegister');
 
+}
+
+
+export async function authenticate(
+    prevState: string | undefined,
+    formData: FormData,
+  ) {
+    try {
+      await signIn('credentials', formData);
+        //clean the cache
+        console.log('redirect!');
+        revalidatePath('/profile');
+        redirect('/profile');
+    } catch (error) {
+      if (error instanceof AuthError) {
+        switch (error.type) {
+          case 'CredentialsSignin':
+            return 'Invalid credentials.';
+          default:
+            return 'Something went wrong.';
+        }
+      }
+      throw error;
+    }
+  }
+
+export async function logoutSession(){
+    try {
+       await signOut();
+         //redirect user to invoices 
+       revalidatePath('/login');
+       redirect('/login');
+    } catch (error) {
+        if (error instanceof AuthError) {
+            switch (error.type) {
+              case 'CredentialsSignin':
+                return 'Invalid credentials.';
+              default:
+                return 'Something went wrong.';
+            }
+          }
+          throw error;
+    }
 }

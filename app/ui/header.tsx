@@ -3,6 +3,7 @@ import Image from 'next/image';
 import NavigationMenu from './components/navigation-menu';
 
 import Spacer from '@/app/ui/spacer.module.css';
+import { signOut } from '@/auth';
 
 export default function Header() {
   // change when login status is conplete
