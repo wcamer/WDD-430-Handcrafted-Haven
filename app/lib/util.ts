@@ -30,11 +30,102 @@ export async function fetchReviews(product_id: string) {
 export async function fetchCart(user_id: string) {
   try {
     const data =
-      await sql<CartProduct>`SELECT * from cart_products WHERE user_id = ${user_id};`;
+      await sql<CartProduct>`SELECT * from cart_products WHERE user_id = ${user_id} ORDER BY cart_id;`;
     return data.rows;
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch cart_products data.');
+  }
+}
+
+export async function updateCartItemQuantity(
+  cart_id: string,
+  product_amount: number,
+) {
+  try {
+    const data =
+      await sql<CartProduct>`UPDATE cart_products SET product_amount = ${product_amount} WHERE cart_id = ${cart_id};`;
+    return data.rows;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to update CartProduct quantity.');
+  }
+}
+
+export async function deleteCartItem(cart_id: string) {
+  try {
+    const data =
+      await sql<CartProduct>`DELETE FROM cart_products WHERE cart_id = ${cart_id};`;
+    return data.rows;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to delete CartProduct item.');
+  }
+}
+
+export async function deleteAllUserCart(user_id: string) {
+  try {
+    const data =
+      await sql<CartProduct>`DELETE FROM cart_products WHERE user_id = ${user_id};`;
+    return data.rows;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error("Failed to delete CartProduct items from user's cart.");
+  }
+}
+
+export async function addCartItem(
+  user_id: string,
+  product_id: string,
+  product_amount: number,
+) {
+  try {
+    const data =
+      await sql<CartProduct>`INSERT INTO cart_products (user_id, product_id, product_amount, date_added)
+      VALUES (
+        ${user_id},
+        ${product_id},
+        ${product_amount},
+        current_date
+      );`;
+    return data.rows;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to insert CartProduct item.');
+  }
+}
+
+export async function checkForExistingCartItem(product_id: string) {
+  try {
+    const data =
+      await sql<CartProduct>`SELECT * from cart_products WHERE product_id = ${product_id}`;
+    return data.rows;
+  } catch (error) {
+    return undefined;
+  }
+}
+
+export async function getCartItemQuantity(cart_id: string) {
+  try {
+    const data =
+      await sql`SELECT product_amount FROM cart_products WHERE cart_id = ${cart_id};`;
+    return data.rows;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to select CartProduct quantity.');
+  }
+}
+
+export async function getCartTotalPrice(user_id: string) {
+  try {
+    const data = await sql`SELECT product_price, product_amount
+      FROM products
+        INNER JOIN cart_products ON products.product_id = cart_products.product_id
+      WHERE cart_products.user_id = ${user_id};`;
+    return data.rows;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to select CartProduct quantity.');
   }
 }
 
@@ -46,6 +137,27 @@ export async function fetchUserBuyingHistory(user_id: string) {
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch buying_history data.');
+  }
+}
+
+export async function addUserBuyingHistory(
+  user_id: string,
+  product_id: string,
+  product_ammount: number,
+) {
+  try {
+    const data =
+      await sql<UserBuyingHistory>`INSERT INTO buying_history (user_id, product_id, product_amount, date_added)
+      VALUES (
+        ${user_id},
+        ${product_id},
+        ${product_ammount},
+        current_date
+      );`;
+    return data.rows;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to insert buying_history item.');
   }
 }
 
@@ -96,17 +208,17 @@ export async function fetchProduct(id: any): Promise<any> {
       productInfo.sellerName = sellerName.rows[0].seller_name;
       productInfo.product_rating = (aggRating / ratingDenom).toString();
       // productInfo.product_rating = productAvgRating
-      console.log(
-        'here is productInfo.....',
-        productInfo,
-        // '\nhere is the products average rating...', (aggRating/ ratingDenom).toString(),
-        '\n here is allProductReviews...',
-        allProductReviews.rows,
-        // '63 out of 70 should be an average of 9...', (aggRating/ratingDenom).toString()
-        // ,'\n here is prodcutAveRating....',productAvgRating.rows[0].review_rating,
-        // '\n check the length of the returned results...', productAvgRating.rows.length,
-        // '\n now i am going to try to do some math...', productAvgRating.rows.length * -10 + productAvgRating.rows[0].review_rating
-      );
+      // console.log(
+      //   'here is productInfo.....',
+      //   productInfo,
+      //   // '\nhere is the products average rating...', (aggRating/ ratingDenom).toString(),
+      //   '\n here is allProductReviews...',
+      //   allProductReviews.rows,
+      //   // '63 out of 70 should be an average of 9...', (aggRating/ratingDenom).toString()
+      //   // ,'\n here is prodcutAveRating....',productAvgRating.rows[0].review_rating,
+      //   // '\n check the length of the returned results...', productAvgRating.rows.length,
+      //   // '\n now i am going to try to do some math...', productAvgRating.rows.length * -10 + productAvgRating.rows[0].review_rating
+      // );
       return productInfo;
     }
   } catch (error) {
