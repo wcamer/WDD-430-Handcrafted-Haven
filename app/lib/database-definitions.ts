@@ -46,6 +46,7 @@ export type CartProduct = {
   cart_id: string; // KEY
   user_id: string; // KEY
   product_id: string; // KEY
+  product_amount: number;
   date_added: string;
 };
 
@@ -53,5 +54,6 @@ export type UserBuyingHistory = {
   history_id: string; // KEY
   user_id: string; // KEY
   product_id: string; // KEY
+  product_amount: number;
   date_ordered: string;
 };
