@@ -1,82 +1,120 @@
 // import Header from '../ui/header'
 import Header from '../../ui/header';
 import Footer from '../../ui/footer'
-import SellerProfile from '../../ui/components/seller-profile';
-import CustomerProfile from '../../ui/components/customer-profile';
+import SellerProfile from '../../ui/components/sellerProfile';
+import CustomerProfile from '../../ui/components/customerProfile';
 import { Metadata } from 'next';
-import { fetchAllProductsBySeller, fetchProfile, fetchSellersOverallRating } from '@/app/lib/util';
+import { fetchAllProductsBySeller, fetchProfile,} from '@/app/lib/util';
 
-export const metadata: Metadata ={
+export let metadata: Metadata ={
   title: 'Profile page'
 }
 
+
+
+interface Seller {
+    seller_id: string;
+    seller_name: string;
+    seller_image: string;
+    seller_imageAlt: string;
+    seller_email: string;
+    seller_description: string;
+    seller_city: string;
+    seller_state: string;
+    seller_address: string;
+    seller_zip: string;
+    aveRev: number;
+    account_type: string;
+    products: any;
+    
+  }
+
+  interface Customer {
+    user_id: string;
+    user_name: string;
+    user_email: string;
+    user_city: string;
+    user_state: string;
+    user_address: string;
+    user_zip: string;
+    buyHistory: any;
+
+  }
+
 export default  async function Page({params}: {params: {id: string}}) {
     const accountId = params.id
-    console.log('here is accountId....', accountId)
+    let displayedProfile
+    let user
+    console.log('here is accountId in profile [id] page....', accountId)
     const cus = '577dd9e6-1af9-484a-ac7c-ddab33403f54'// this is customer id
     const sell = 'b3a538e3-e006-4fbc-b334-f53d599ade77' // this is a seller id
-
-////////////////////base case that works if profile is seller
-    // const [profileInfo, sellersProducts] = await Promise.all([
-    //     fetchProfile(accountId), 
-    //     fetchAllProductsBySeller(accountId)
-    // ])
-
-   
-    // /////////// in case the profile is a seller
-    // //to get seller's average rating (added all ratings for products based on seller id then divide by total number of products)
-
-    // let sellerTotalRatingPoints = 0
-    // {
-    //     for (let i = 0; i < sellersProducts.length; i++ ){
-    //         // sellerOverallRating += await fetchSellersOverallRating(sellersProducts[i].product_id)
-    //         const pr = await fetchSellersOverallRating(sellersProducts[i].product_id)
-
-    //         console.log('the cont int he forrrrrrrrr is...',i
-    //             ,'\nhere is sellerProducts length...', sellersProducts.length
-    //             ,'\n Here is pr....',pr
-    //         )
-    //         sellerTotalRatingPoints+= pr
-
-    //     } 
-    // }
-
-    // let sellerAveRating = sellerTotalRatingPoints / sellersProducts.length
-
-       
-    // console.log('here are profileinfo....', profileInfo)
-    // console.log('here are sellerProducts...', sellersProducts)
-    // console.log('here are sellerTotalRatingPoints....', sellerTotalRatingPoints,
-    //     '\nsellerAveRating...', sellerAveRating
-    // )
-///////end of base case
 
 
 
 //////////////////modular look up
     const profileInfo = await fetchProfile(accountId)
 
-    // console.log('herei the typeof profileInfo.....', typeof(profileInfo))
+    console.log('herei the profileInfo after finding.....', profileInfo)
 
-    if(profileInfo.account_type = 'seller'){
-        const sellersProducts = await fetchAllProductsBySeller(accountId)
-        let sellerTotalRatingPoints = 0; //starting amount
-        {
-                    for (let i = 0; i < sellersProducts.length; i++ ){
-                        // sellerOverallRating += await fetchSellersOverallRating(sellersProducts[i].product_id)
-                        const pr = await fetchSellersOverallRating(sellersProducts[i].product_id)
+    if(profileInfo.account_type === 'seller'){
+        // const sellersProducts = await fetchAllProductsBySeller(accountId)
+        // let sellerTotalRatingPoints = 0; //starting amount
+        // {
+        //             for (let i = 0; i < sellersProducts.length; i++ ){
+        //                 // sellerOverallRating += await fetchSellersOverallRating(sellersProducts[i].product_id)
+        //                 const pr = await fetchSellersOverallRating(sellersProducts[i].product_id)
             
-                        // console.log('the cont int he forrrrrrrrr is...',i
-                        //     ,'\nhere is sellerProducts length...', sellersProducts.length
-                        //     ,'\n Here is pr....',pr
-                        // )
-                        sellerTotalRatingPoints+= pr
+        //                 // console.log('the cont int he forrrrrrrrr is...',i
+        //                 //     ,'\nhere is sellerProducts length...', sellersProducts.length
+        //                 //     ,'\n Here is pr....',pr
+        //                 // )
+        //                 sellerTotalRatingPoints+= pr
             
-                    } 
-                }
-                let sellerAveRating = sellerTotalRatingPoints / sellersProducts.length
+        //             } 
+        //         }
+        //         let sellerAveRating = sellerTotalRatingPoints / sellersProducts.length
+        console.log('we got a seller................................')
+        let seller: Seller = {
+            seller_id: profileInfo.seller_id,
+            seller_name: profileInfo.seller_name,
+            seller_image: '/images/600x600ph.jpg', // this needs to be added to db
+            seller_imageAlt: ` Profile image of ${profileInfo.seller_name}`,
+            seller_email: profileInfo.seller_email,
+            seller_description: profileInfo.seller_description,
+            seller_city: profileInfo.seller_city,
+            seller_state: profileInfo.seller_state,
+            seller_address: profileInfo.seller_address,
+            seller_zip: profileInfo.seller_zip,
+            aveRev: profileInfo.aveRev,
+            account_type: profileInfo.account_type,
+            products: profileInfo.products
+        }
+      
+        
+        displayedProfile = <SellerProfile seller={seller} />
     } else {
-        console.log("we got a customer...")
+        console.log("we got a customer...\nhere is the info........\n",profileInfo)
+        
+
+
+        let customer: Customer = {
+            user_id: profileInfo.user_id,
+            user_name: profileInfo.user_name,
+            user_email: profileInfo.user_email,
+            user_city: profileInfo.user_city,
+            user_state: profileInfo.user_state,
+            user_address: profileInfo.user_address,
+            user_zip: profileInfo.user_zip,
+            buyHistory: profileInfo.buyHistory
+        }
+
+        console.log('here is the loaded customer var...\n',customer)
+
+        displayedProfile = <CustomerProfile customer={customer}  />
+        // displayedProfile = <CustomerProfile  customer={customer} />
+
+
+
     }
     // const [sellersProducts] = await Promise.all([
     //     fetchProfile(accountId), 
@@ -87,7 +125,7 @@ export default  async function Page({params}: {params: {id: string}}) {
 ///////////////end of modular
 
 
-    let displayedProfile =    <SellerProfile />  //this will be the variable that is passed a profile
+    // let displayedProfile =    <SellerProfile />  //this will be the variable that is passed a profile
         
     
 
@@ -96,16 +134,8 @@ export default  async function Page({params}: {params: {id: string}}) {
       
       <Header />
       <h1>Profile Page</h1>
-      {/* base case below */}
-
-        {/* <SellerProfile />
-        <CustomerProfile /> */}
-
-      {/* end of base case */}
-
-      {/* modular case below*/}
+      
         {displayedProfile}
-     
       
       <Footer />
     </main>
