@@ -1,6 +1,7 @@
 'use server'
 // const {sql, db} = require('@vercel/postgres')
 import {sql} from '@vercel/postgres'
+
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 import { useRouter } from 'next/router'
@@ -62,16 +63,104 @@ export async function fetchByMostRecent(){
 // works
 
 export async function fetchProfile(id: any): Promise<any>{
-
+  console.log('here is idddddddddddddddddddddd', id)
+  let user // this will return the profile info
   try{
-    //note in the user variable "seller-id" is hardcoded
-    const user = await sql `SELECT * FROM sellers WHERE seller_id=${id}`
-    console.log('here is user in fetchProfile...',user.rows[0])
-    return user.rows[0] 
-  }catch (error){
-    console.log('fetchProfile error... : ', error)
+    //this is going to return a seller
+    const search = await sql `SELECT * FROM sellers WHERE seller_id=${id};`
+    user = search.rows[0]
+    //this part will get average review score for seller
+    const sellersProducts = await fetchAllProductsBySeller(id)
+    console.log('here is how many products this seller hasssssssssssss', sellersProducts.length)
+   
+   //review average section
+    let sellerTotalRatingPoints = 0; //starting amount
+    let denom = 0 // initial value to figure sellerAveRating
+    let sellerAveRating; //this will be either pending or a number at the end
+        for (let i = 0; i < sellersProducts.length; i++ ){
+            // sellerOverallRating += await fetchSellersOverallRating(sellersProducts[i].product_id)
+            const pr = await fetchProductReviews(sellersProducts[i].product_id)
+            console.log('Here are the product reviews returned to fetchProfile...\n'
+              ,pr
+            )
+            // console.log('the cont int he forrrrrrrrr is...',i
+            //     ,'\nhere is sellerProducts length...', sellersProducts.length
+            //     ,'\n Here is pr....',pr
+            // )
+
+            if(pr.length > 0){
+              console.log("at least 1 review......")
+              denom += pr.length
+              for (let k = 0; k < pr.length; k++){
+                sellerTotalRatingPoints+= pr[k].review_rating
+              }
+
+            }
+
+            // sellerTotalRatingPoints+= pr
+
+        } 
     
-    return '0'
+    // let sellerAveRating = sellerTotalRatingPoints / sellersProducts.length
+    if(denom === 0){
+      sellerAveRating = 'Pending'
+    }else{
+           sellerAveRating = sellerTotalRatingPoints / denom
+
+    }
+
+    console.log(
+      'sellerTotalRatingPoints...',sellerTotalRatingPoints
+      ,'\ndenom....', denom
+      ,'\nsellerAveRating.....', sellerAveRating
+    )
+
+    //end of review average section
+
+
+    //returns all information about sellers products
+    console.log('here is user before we start adding stuff...\n',user)
+    user.aveRev = sellerAveRating
+    user.account_type = 'seller'
+    user.products = sellersProducts
+    
+
+    console.log('here user after the update....\n',user)
+    // let overallReviewScore = 
+    //   await sql`SELECT seller_id, AVG(review_score) AS average_review_score
+    //             FROM reviews
+    //             WHERE seller_id = ${id}
+    //             GROUP BY ${id};
+    //   `
+
+
+
+    //   console.log('overaverevsco...',overallReviewScore.rows)
+    // console.log('here is user in fetchProfile...',user.rows[0])
+    console.log('user created successfully...')
+    return user 
+  }catch (error){
+
+    // console.log('fetchProfile error... : ', error)
+    console.log('No seller found.  Checking for users...')
+    try{
+      let search = await sql `SELECT * FROM users WHERE user_id=${id}`
+      user = search.rows[0]
+      
+      let buyHistory = await sql`SELECT * FROM buying_history WHERE user_id=${id}`
+      
+      user.buyHistory = buyHistory.rows
+      user.account_type = 'customer'
+
+      console.log('here is user/cusomer after it has been manipulated..,\n',user)
+      return user
+
+    }catch(error){
+      console.log('fetchProfile error... There is no seller or user at the following id: ', id)
+      return '0'
+    }
+    
+    
   }
   
 }
@@ -87,17 +176,25 @@ export async function checkSeller(id: any) {
 
 }
 
-//give 1 product_id to start the math on all ratings 
-export async function fetchSellersOverallRating(id: any): Promise<any>{
+//give 1 product_id to get all the reviewsf or it
+export async function fetchProductReviews(id: any): Promise<any>{
+  let prod = await sql`SELECT product_name FROM products where product_id=${id}`
   let allProductReviews = await sql `Select * FROM reviews WHERE product_id=${id}`
-  let ratingDenom = allProductReviews.rows.length
-  let aggRating = 0
+  // console.log('fetchProductReviews was successful ...')
+  // console.log('allproductReviews in side of fetchProductReviews for...',prod.rows[0].product_name,'.\n', allProductReviews.rows.length)
+  console.log('fetchProductReviews...DONE')
+  return allProductReviews.rows
+  // let ratingDenom = allProductReviews.rows.length
+  // let aggRating = 0
 
-      {
-        for(let i = 0; i < allProductReviews.rows.length; i++){
-            aggRating += allProductReviews.rows[i].review_rating
-        }
-      }
+  //     {
+  //       for(let i = 0; i < allProductReviews.rows.length; i++){
+  //         let score = allProductReviews.rows[i].review_rating
+  //         console.log('Score in the for loop of fetchselersoverallrating....',score)
+  //         aggRating += score 
+  //           // aggRating += allProductReviews.rows[i].review_rating
+  //       }
+  //     }
 
   // console.log('here are the figures for fetchSellersOvearllRating...\n',
   //   'aggrating: ', aggRating,
@@ -105,14 +202,15 @@ export async function fetchSellersOverallRating(id: any): Promise<any>{
   //   '\n average score...', (aggRating/ratingDenom)
   // )
 
-  return aggRating / ratingDenom
+  // return aggRating / ratingDenom
 }
 
 
 export async function fetchAllProductsBySeller(id: any): Promise<any>{
    const prods = await sql `SELECT * FROM products WHERE seller_id=${id}`
   //  console.log('here are your products in fetchallproducts...',prods.rows)
-    return prods.rows
+  console.log("fetchAllProductsBySeller...DONE")  
+  return prods.rows
 
   }
 
