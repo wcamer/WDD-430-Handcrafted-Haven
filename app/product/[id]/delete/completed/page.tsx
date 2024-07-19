@@ -7,7 +7,7 @@ import { Metadata } from 'next';
 
 
 export const metadata: Metadata = {
-  title: 'Product Not Found ',
+  title: 'Product Deleted Successfully ',
 };
 export default async function Page() {
   

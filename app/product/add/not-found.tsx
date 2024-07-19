@@ -7,7 +7,7 @@ import { Metadata } from 'next';
 
 
 export const metadata: Metadata = {
-  title: 'Product Not Found ',
+  title: 'Access Denied to Product Creation ',
 };
 export default async function Page() {
   
