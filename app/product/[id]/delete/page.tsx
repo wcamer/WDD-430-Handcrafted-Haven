@@ -9,7 +9,7 @@ import Highlight from '@/app/ui/product-highlight.module.css'
 import { notFound } from 'next/navigation';
 
 export const metadata: Metadata = {
-  title: 'Delete Product',
+  title: 'Delete Product Page',
 };
 
 interface Product {
