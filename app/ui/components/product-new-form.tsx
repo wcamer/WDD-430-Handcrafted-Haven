@@ -68,7 +68,10 @@ export function NewProductForm({seller}: {seller: string}){
                 <input 
                 required
                 // type='file'
+                type='text'
                 value={image}
+                // value={'/images/600x600ph.jpg'}
+                placeholder='/images/600x600ph.jpg'
                 onChange={(e) => setImage(e.target.value)}
                 ></input><br></br>
                 
