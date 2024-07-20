@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { generatePagination } from '@/app/lib/util';
 import { usePathname, useSearchParams } from 'next/navigation';
 
-export default function Pagination({ totalPages }: { totalPages: number }) {
+export default async function Pagination({ totalPages }: { totalPages: number }) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const currentPage = Number(searchParams.get('page')) || 1;
@@ -17,7 +17,7 @@ export default function Pagination({ totalPages }: { totalPages: number }) {
     return `${pathname}?${params.toString()}`;
   };
 
-  const allPages = generatePagination(currentPage, totalPages);
+  const allPages =  generatePagination(currentPage, totalPages);
 
   return (
     <div className="inline-flex">

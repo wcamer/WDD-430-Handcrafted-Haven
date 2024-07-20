@@ -4,7 +4,7 @@ import Footer from '../../ui/footer'
 import SellerProfile from '../../ui/components/sellerProfile';
 import CustomerProfile from '../../ui/components/customerProfile';
 import { Metadata } from 'next';
-import { fetchAllProductsBySeller, fetchProfile,} from '@/app/lib/util';
+import { fetchAllProductsBySeller, fetchProfile,} from '@/app/lib/serv-util';
 
 export let metadata: Metadata ={
   title: 'Profile page'
@@ -75,7 +75,9 @@ export default  async function Page({params}: {params: {id: string}}) {
             account_type: profileInfo.account_type,
             products: profileInfo.products
         }
-      
+
+        // console.log('here is seller in profile [iddddddddddddddd', seller)
+       
         
         displayedProfile = <SellerProfile seller={seller} />
     } else {

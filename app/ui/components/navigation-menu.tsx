@@ -31,16 +31,20 @@ export default function NavigationMenu(navigationMenu: NavigationMenue) {
         <Link
           className={`${Navigation.navLink} hover:${Navigation.navLinkHover}`}
           href="/profile"
+          // href='/profile/b3a538e3-e006-4fbc-b334-f53d599ade77' //seller profile
+          //href='/profile/577dd9e6-1af9-484a-ac7c-ddab33403f54' //customer profile
         >
           Profile
         </Link>
-        <Link
+
+        {/* <Link
           className={`${Navigation.navLink} hover:${Navigation.navLinkHover}`}
           href="/products/manage"
         >
           Manage Products
-        </Link>
+        </Link> */}
         <Link
+
           className={`${Navigation.navLink} hover:${Navigation.navLinkHover}`}
           href="/cart"
         >

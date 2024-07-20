@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Highlight from '@/app/ui/product-highlight.module.css'
-import { setUserProdRating } from "@/app/lib/util";
+import { setUserProdRating } from "@/app/lib/serv-util";
 import { useState } from "react";
 
 
@@ -31,7 +31,7 @@ export default async function ProductHighlight({product, user}: {product: any, u
 
         const prod = product
 
-        // console.log('here is prod in the productHighlight...', prod)
+        console.log('here is prod in the productHighlight...', prod)
         
         const prodName = prod.product_name
         const sellerName = prod.sellerName // need to run a query or query for the object then break it down
@@ -39,6 +39,8 @@ export default async function ProductHighlight({product, user}: {product: any, u
         let rating = prod.product_rating
         const imageUrl = prod.product_image
         const imageAlt = `This is an image of ${prodName} by ${prod.sellerName}`
+
+        // console.log("rating in produthightly compoente..............", rating)
 
         if(rating === 0){
             rating = 'Pending'

@@ -2,7 +2,7 @@
 import Header from '@/app/ui/header';
 import Footer from '@/app/ui/footer';
 import ProductHighlight from '@/app/ui/components/productHighlight';
-import { fetchProduct, fetchUser, checkSeller } from '@/app/lib/util';
+import { fetchProduct, fetchUser, checkSeller } from '@/app/lib/serv-util';
 import { ProductEditForm } from '@/app/ui/components/product-edit-form';
 import { Metadata } from 'next';
 import Highlight from '@/app/ui/product-highlight.module.css'
@@ -38,7 +38,7 @@ export default async function Page({ params }: { params: {id: string, userId: st
     // const id = params.id; // this will be for production
     // let user_id = params.id
     let user_id = 'b3a538e3-e006-4fbc-b334-f53d599ade77' // this is for testing
-    console.log("!!!!!!!!!!!!! in the product add", params.id)
+    // console.log("!!!!!!!!!!!!! in the product add", params.id)
 
     if(params.id === undefined){
 

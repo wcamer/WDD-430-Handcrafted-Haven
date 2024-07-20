@@ -2,7 +2,7 @@
 import Header from '@/app/ui/header';
 import Footer from '@/app/ui/footer';
 import ProductHighlight from '@/app/ui/components/productHighlight';
-import { fetchProduct, fetchUser } from '@/app/lib/util';
+import { fetchProduct, fetchUser } from '@/app/lib/serv-util';
 import { ReviewForm } from '@/app/ui/components/review-form';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';

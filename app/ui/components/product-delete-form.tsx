@@ -1,7 +1,7 @@
 'use client'
 
 import PE from '@/app/ui/product-edit.module.css'
-import { deleteProduct } from "@/app/lib/util"
+import { deleteProduct } from "@/app/lib/serv-util"
 
 interface Product {
     product_id: string

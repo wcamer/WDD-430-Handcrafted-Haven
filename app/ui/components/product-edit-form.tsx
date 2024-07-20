@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import PE from '@/app/ui/product-edit.module.css'
-import { editProduct } from "@/app/lib/util"
+import { editProduct } from "@/app/lib/serv-util"
 
 interface Product {
     product_id: string

@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import Products from '@/app/ui/products.module.css';
-import { fetchProduct } from '@/app/lib/util';
+import { fetchProduct } from '@/app/lib/serv-util';
 
 
 

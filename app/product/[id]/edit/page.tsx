@@ -1,7 +1,7 @@
 // import Header from '../ui/header'
 import Header from '@/app/ui/header';
 import Footer from '@/app/ui/footer';
-import { fetchProduct, fetchSeller } from '@/app/lib/util';
+import { fetchProduct, fetchSeller } from '@/app/lib/serv-util';
 import { ProductEditForm } from '@/app/ui/components/product-edit-form';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
@@ -31,7 +31,7 @@ interface User {
 
 export default async function Page({ params }: { params: {id: string, userId: string}}) {
     const id = params.id;
-    console.log("!!!!!!!!!!!!!", params)
+    // console.log("!!!!!!!!!!!!!", params)
     ////acutal user  should be an error
     // const someUser = 'bedfe120-7bff-4d8a-b5a8-5b2644d2b57c' //Good test example this will need to get the user is from session
     

@@ -26,7 +26,7 @@ export default async function SellerProfile({seller}: {seller: Seller}){
     interface Product {
         name: string;
         imageUrl: string;
-        price: number;
+        price: number; 
         rating: number;
         id: string;
         sellerId: string;
@@ -76,7 +76,7 @@ export default async function SellerProfile({seller}: {seller: Seller}){
                 </button>
                 <section className="p-2 m-2 md:grid grid-cols-3 lg:grid-cols-5">
                     {products.map((product: Product) => {
-                      console.log('here is a single producttttttttt', product)
+                      // console.log('here is a single producttttttttt', product)
                         return (
                         <div className="p-2 " key={product.id}>
                           <ProfileProductDisplay
