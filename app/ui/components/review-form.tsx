@@ -18,7 +18,7 @@ interface Product {
     const [reviewDesc, setReviewDesc] = useState('')
 
     const userId = user.user_id
-    console.log('here is userId in the review formmmmmmmmmmmmmmmmm', userId)
+    // console.log('here is userId in the review form', userId)
     const productId = product.product_id
     const settingUserProdRating = setUserProdRating
                 .bind(
@@ -30,16 +30,9 @@ interface Product {
 
                 )
 
-    const initialState: any = { message: null, errors: {} };
-    // const[state, formAction] = useActionState(settingUserProdRating, initialState)
-        const formAction = settingUserProdRating
+    const formAction = settingUserProdRating
     
-    // const handleSubmit =  (e: any)  =>{
-    //     e.preventDefault();
-    //     const userId =  user.user_id// 'insert user id here'
-    //     const productId = product.product_id //'insert prod id here'
-    //     setUserProdRating(userId, productId, reviewRating, reviewDesc)
-    // }
+ 
 
 
 
@@ -48,9 +41,7 @@ interface Product {
 
     
  <section className={`${Highlight.rating} p-2 m-2 outline md: col-start-2 row-start-2`}>
-{/* <section> */}
                 <form className={`${Highlight.ratingForm}`}
-                // onSubmit={handleSubmit}
                 action={formAction}
                 >
                     <fieldset className="flex flex-col ">
@@ -87,8 +78,6 @@ interface Product {
                         <button className={`${Highlight.submitBtn} outline p-2 m-2`} 
                         type='submit'
                         disabled={!reviewRating || !reviewDesc}
-                        // onClick={setUserProdRating('someuser','prodid','reviewer rating', 'review description')}
-                        // onClick={document.querySelector('.Highlight.submitBtn').setAttribute='disabled'}
                         
                        
                         >

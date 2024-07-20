@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import Products from '@/app/ui/products.module.css';
 
-// placeholder test code below
+
 export default function ProductDisplay(props: any) {
   return (
     <section className={`${Products.prodCont}`} key={props.id}>

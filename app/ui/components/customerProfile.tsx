@@ -70,8 +70,7 @@ export default function CustomerProfile({customer}: {customer: Customer}){
                             return (
                             <div className="p-2 " key={item.product_id}>
                             <PurchasedItem
-                                   
-                                    props={item}
+                                props={item}
                             />
                             </div>
 

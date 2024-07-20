@@ -7,10 +7,8 @@ import { fetchProduct } from '@/app/lib/util';
 
 export default async function PurchasedItem({props}: {props: any}) {
 
-  console.log('here is props in product-disaplyyyyyy', props)
+  // console.log('here is props in purchase-item', props)
 
-  const getItem = fetchProduct.bind(null,props.product_id)
-  console.log('here is getItemmmmmmmmmmmmmmmmmmmmmm', getItem)
   const item = await fetchProduct(props.product_id)
 
   if(props.product_rating === 0){

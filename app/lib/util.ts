@@ -1,5 +1,5 @@
 'use server'
-// const {sql, db} = require('@vercel/postgres')
+
 import {sql} from '@vercel/postgres'
 
 import { revalidatePath } from 'next/cache'
@@ -390,6 +390,8 @@ export  async function setUserProdRating(
 
 }
 
+
+//fully functional
 export async function deleteProduct(
   product_id: any,
   seller_id: any,
@@ -435,11 +437,11 @@ export async function createNewProdcut(
   const currentDate = date.toISOString();
  
  //// comment out below
-  console.log(`here are the variablesfor createNewProduct.........\n
-${sellerId}, ${name}, ${description}, ${initialRating} ${Math.round(price)}, ${thumbnail}, ${image}, ${currentDate})
-`
-  )
-  //////
+//   console.log(`here are the variablesfor createNewProduct.........\n
+// ${sellerId}, ${name}, ${description}, ${initialRating} ${Math.round(price)}, ${thumbnail}, ${image}, ${currentDate})
+// `
+//   )
+  
 
   try{
     await sql`INSERT INTO products 
@@ -460,14 +462,16 @@ ${sellerId}, ${name}, ${description}, ${initialRating} ${Math.round(price)}, ${t
   let id
   try{
    const prods = await sql `SELECT * FROM products WHERE seller_id=${sellerId}`
-    console.log('here are prods after it was created...',prods.rows)
+    // console.log('here are prods after it was created...',prods.rows)
     const newestProductRowIndex = (prods.rows.length) - 1
-    console.log('here is the lengthe of prods.rows.length...', prods.rows.length
-      , newestProductRowIndex
-      , prods.rows[newestProductRowIndex].product_id
-    )
+    // console.log('here is the lengthe of prods.rows.length...', prods.rows.length
+    //   , newestProductRowIndex
+    //   , prods.rows[newestProductRowIndex].product_id
+    // )
+
     id = prods.rows[newestProductRowIndex].product_id
-    console.log('here is the proID for the redirect', id)
+
+    // console.log('here is the proID for the redirect', id)
     // revalidatePath('/product/add')
        // redirect(`/product/${id}`)
 
@@ -529,7 +533,6 @@ export async function editProduct(
 
   revalidatePath(`/product/${id}/edit`)
   redirect(`/product/${id}`)
-  // redirect('/')
 }
 
 // testing only

@@ -13,13 +13,11 @@ interface Seller{
 export function NewProductForm({seller}: {seller: string}){
     console.log('here is seller in newproductform....',seller)
 
-    // const [sellerId, setSellerId] = useState('')
     const [prodName, setProdName] = useState('')
     const [desc, setDesc] = useState('')
     const [price, setPrice] = useState('')
     const [image, setImage] = useState('')
 
-    const initialState: any = { message: null, errors: {} };
     const createdProduct = createNewProdcut.bind(null,
                                             seller,
                                             prodName,
@@ -30,18 +28,12 @@ export function NewProductForm({seller}: {seller: string}){
                                         )
 
 
-    // const[state, formAction] = useActionState(createdProduct, initialState)
     const formAction = createdProduct
 
-    // const handleSubmit = (e: any) =>{
-    //     e.preventDefault()
-    //     createNewProdcut(sellerId,prodName,desc,price,image)
-
-    // }
+ 
 
     return (
         <form className={`${PE.form} flex p-2 m-2`} 
-        // onSubmit={handleSubmit}
         action={formAction}
         
         >
@@ -67,10 +59,8 @@ export function NewProductForm({seller}: {seller: string}){
                 <label className="text-xl">Image</label><br></br>
                 <input 
                 required
-                // type='file'
                 type='text'
                 value={image}
-                // value={'/images/600x600ph.jpg'}
                 placeholder='/images/600x600ph.jpg'
                 onChange={(e) => setImage(e.target.value)}
                 ></input><br></br>

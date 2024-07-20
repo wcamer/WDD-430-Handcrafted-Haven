@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from "react"
-
 import PE from '@/app/ui/product-edit.module.css'
 import { editProduct } from "@/app/lib/util"
 
@@ -10,17 +9,12 @@ interface Product {
 }
 
 
-// export function ProductEditForm({product}: {product: any}){
 export function ProductEditForm({product, user}: {product: any, user: any}){
     const [prodName, setProdName] = useState(product.product_name)
     const [prodDesc, setProdDesc] = useState(product.product_description)
     const [price, setPrice] = useState(product.product_price)
     const [image, setImage] = useState(product.product_image)
-    console.log('here is user in the produt-edit-form...', user)
-
-
-    //something new
-    const initialState: any = { message: null, errors: {} };
+    // console.log('here is user in the produt-edit-form...', user)
 
 
     const edittedProduct = editProduct.bind(null,
@@ -32,22 +26,12 @@ export function ProductEditForm({product, user}: {product: any, user: any}){
 
                         )
 
-    // const[state, formAction] = useActionState(edittedProduct, initialState)
     const formAction = edittedProduct
-    // const handleSubmit = (e: any) =>{
-    //     // e.preventDefault()
-    //     // editProduct(product.product_id,prodName,prodDesc, price, image )
-    //     edittedProduct
-    //     console.log('handlesubmit has been clicked')
-    // }
 
-    // const
 
     return (
         <form 
             className={`${PE.form} flex p-2 m-2`}
-            // onSubmit={handleSubmit}
-            // action={handleSubmit}
             action={formAction} 
             
         >

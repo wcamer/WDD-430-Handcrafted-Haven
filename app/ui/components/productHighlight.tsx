@@ -2,18 +2,12 @@
 
 import Image from "next/image";
 import Highlight from '@/app/ui/product-highlight.module.css'
-import { fetchProduct, fetchProducts, setUserProdRating } from "@/app/lib/util";
+import { setUserProdRating } from "@/app/lib/util";
 import { useState } from "react";
 
 
 interface Product {
-    // name: string;
-    // imageUrl: string;
-    // price: number;
-    // rating: number;
-    // id: string;
-    // sellerName: string;
-    // imageAlt: string;
+   
     product_name: string;
     product_description: string;
     product_rating: string;
@@ -22,9 +16,10 @@ interface Product {
     sellerName: string;
     
 
-     
     
   }
+
+
 interface User{
     user_id: string;
 }
@@ -36,7 +31,7 @@ export default async function ProductHighlight({product, user}: {product: any, u
 
         const prod = product
 
-        console.log('here is prod in the second productHighlight...', prod)
+        // console.log('here is prod in the productHighlight...', prod)
         
         const prodName = prod.product_name
         const sellerName = prod.sellerName // need to run a query or query for the object then break it down
@@ -84,7 +79,10 @@ export default async function ProductHighlight({product, user}: {product: any, u
                 </div>
 
                 <div>
-                    <button className={`${Highlight.addToCart} outline p-2 m-2`}>
+                    <button 
+                    className={`${Highlight.addToCart} 
+                    outline p-2 m-2
+                    `}>
                         Add To Cart
                     </button>
                 </div>

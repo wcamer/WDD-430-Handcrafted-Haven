@@ -1,6 +1,5 @@
 'use client'
 
-// import { useState, useActionState } from "react"
 
 import PE from '@/app/ui/product-edit.module.css'
 import { deleteProduct } from "@/app/lib/util"
@@ -10,28 +9,21 @@ interface Product {
 }
 
 
-// export function ProductEditForm({product}: {product: any}){
 export function DeleteProductForm({product, user}: {product: any, user: any}){
-    // const [prodName, setProdName] = useState(product.product_name)
-    // const [prodDesc, setProdDesc] = useState(product.product_description)
-    // const [price, setPrice] = useState(product.product_price)
-    // const [image, setImage] = useState(product.product_image)
+    
     const prodName = product.product_name
     const price = product.product_price 
     const image = product.product_image 
     const prodDesc = product.product_description
-    console.log('here is user in the delete====produt-form...', user)
+    // console.log('here is user in the delete-produt-form...', user)
 
 
-    //something new
-    // const initialState: any = { message: null, errors: {} };
+
     const deletedProduct = deleteProduct.bind(null,
                             product.product_id,
                             user.user_id
 
                         )
-
-    // const[state, formAction] = useActionState(deletedProduct, initialState)
 
     const formAction = deletedProduct
 
