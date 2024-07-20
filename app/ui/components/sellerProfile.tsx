@@ -22,10 +22,7 @@ interface Seller {
 
 
 export default async function SellerProfile({seller}: {seller: Seller}){
-  // if i only really need the id then just pass the id and then do all the retrieving here
 
-
-    // // For testing purposes and will be deleted later
     interface Product {
         name: string;
         imageUrl: string;
@@ -37,8 +34,10 @@ export default async function SellerProfile({seller}: {seller: Seller}){
         imageAlt: string;
         link: string;
       }
+
+
     const products = seller.products
-    console.log('products in sellProfile componenet..........\n',products)
+    // console.log('products in sellProfile componenet..........\n',products)
   
     return (
         <div className="lg:grid grid-cols-2">
@@ -81,27 +80,12 @@ export default async function SellerProfile({seller}: {seller: Seller}){
                         return (
                         <div className="p-2 " key={product.id}>
                           <ProfileProductDisplay
-                         
                             props={product}
-                            // name={product.name}
-                            // price={product.price}
-                            // rating={product.rating}
-                            // imageUrl={product.imageUrl}
-                            // key={product.id}
-                            // link={`/product/${product.product_id}`}
+                          
                           />
                         </div>
 
-                        // <ProfileProductDisplay
-                         
-                        //     props={product}
-                        //     // name={product.name}
-                        //     // price={product.price}
-                        //     // rating={product.rating}
-                        //     // imageUrl={product.imageUrl}
-                        //     // key={product.id}
-                        //     // link={`/product/${product.product_id}`}
-                        // />
+              
                         );
                     })}
                 </section>

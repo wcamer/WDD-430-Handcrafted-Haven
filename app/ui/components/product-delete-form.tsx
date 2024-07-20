@@ -1,6 +1,5 @@
 'use client'
 
-
 import PE from '@/app/ui/product-edit.module.css'
 import { deleteProduct } from "@/app/lib/util"
 

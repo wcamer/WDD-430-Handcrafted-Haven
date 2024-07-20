@@ -16,9 +16,7 @@ interface Customer {
   }
   
 export default function CustomerProfile({customer}: {customer: Customer}){
-    console.log('here is customer in the customer profile compoenent....\n',customer)
     const items = customer.buyHistory
-    console.log('here is itemssssssssssssssssss', items)
 
 
 
@@ -66,7 +64,7 @@ export default function CustomerProfile({customer}: {customer: Customer}){
                 <div className="flex flex-col justify-center justify-around">
                     <div className="p-2 m-2 flex justify-around">
                         {items.map((item: any ) => {
-                        console.log('here is a single item***********************************', item)
+                        // console.log('here is a single item***********************************', item)
                             return (
                             <div className="p-2 " key={item.product_id}>
                             <PurchasedItem

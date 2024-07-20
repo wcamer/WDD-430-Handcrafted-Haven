@@ -49,47 +49,31 @@ export async function fetchByMostRecent(){
 
 }
 
-// export async function name(params:type) {
-  
-// }
-
-// export async function fetchAllRating(){
-//   try{
-//     const sql
-//   }
-
-// }
-
-// works
 
 export async function fetchProfile(id: any): Promise<any>{
-  console.log('here is idddddddddddddddddddddd', id)
+  // console.log('here is idddddddddddddddddddddd', id)
   let user // this will return the profile info
   try{
     //this is going to return a seller
     const search = await sql `SELECT * FROM sellers WHERE seller_id=${id};`
     user = search.rows[0]
+    
     //this part will get average review score for seller
     const sellersProducts = await fetchAllProductsBySeller(id)
-    console.log('here is how many products this seller hasssssssssssss', sellersProducts.length)
+    // console.log('here is how many products this seller hasssssssssssss', sellersProducts.length)
    
    //review average section
     let sellerTotalRatingPoints = 0; //starting amount
     let denom = 0 // initial value to figure sellerAveRating
     let sellerAveRating; //this will be either pending or a number at the end
         for (let i = 0; i < sellersProducts.length; i++ ){
-            // sellerOverallRating += await fetchSellersOverallRating(sellersProducts[i].product_id)
             const pr = await fetchProductReviews(sellersProducts[i].product_id)
             console.log('Here are the product reviews returned to fetchProfile...\n'
               ,pr
             )
-            // console.log('the cont int he forrrrrrrrr is...',i
-            //     ,'\nhere is sellerProducts length...', sellersProducts.length
-            //     ,'\n Here is pr....',pr
-            // )
+           
 
             if(pr.length > 0){
-              console.log("at least 1 review......")
               denom += pr.length
               for (let k = 0; k < pr.length; k++){
                 sellerTotalRatingPoints+= pr[k].review_rating
@@ -97,11 +81,10 @@ export async function fetchProfile(id: any): Promise<any>{
 
             }
 
-            // sellerTotalRatingPoints+= pr
+            
 
         } 
     
-    // let sellerAveRating = sellerTotalRatingPoints / sellersProducts.length
     if(denom === 0){
       sellerAveRating = 'Pending'
     }else{
@@ -109,34 +92,21 @@ export async function fetchProfile(id: any): Promise<any>{
 
     }
 
-    console.log(
-      'sellerTotalRatingPoints...',sellerTotalRatingPoints
-      ,'\ndenom....', denom
-      ,'\nsellerAveRating.....', sellerAveRating
-    )
+    // console.log(
+    //   'sellerTotalRatingPoints...',sellerTotalRatingPoints
+    //   ,'\ndenom....', denom
+    //   ,'\nsellerAveRating.....', sellerAveRating
+    // )
 
     //end of review average section
 
 
     //returns all information about sellers products
-    console.log('here is user before we start adding stuff...\n',user)
+    // console.log('here is user before we start adding stuff...\n',user)
     user.aveRev = sellerAveRating
     user.account_type = 'seller'
     user.products = sellersProducts
     
-
-    console.log('here user after the update....\n',user)
-    // let overallReviewScore = 
-    //   await sql`SELECT seller_id, AVG(review_score) AS average_review_score
-    //             FROM reviews
-    //             WHERE seller_id = ${id}
-    //             GROUP BY ${id};
-    //   `
-
-
-
-    //   console.log('overaverevsco...',overallReviewScore.rows)
-    // console.log('here is user in fetchProfile...',user.rows[0])
     console.log('user created successfully...')
     return user 
   }catch (error){
@@ -152,10 +122,11 @@ export async function fetchProfile(id: any): Promise<any>{
       user.buyHistory = buyHistory.rows
       user.account_type = 'customer'
 
-      console.log('here is user/cusomer after it has been manipulated..,\n',user)
+      // console.log('here is user/cusomer after it has been manipulated..,\n',user)
       return user
 
     }catch(error){
+
       console.log('fetchProfile error... There is no seller or user at the following id: ', id)
       return '0'
     }
@@ -182,7 +153,7 @@ export async function fetchProductReviews(id: any): Promise<any>{
   let allProductReviews = await sql `Select * FROM reviews WHERE product_id=${id}`
   // console.log('fetchProductReviews was successful ...')
   // console.log('allproductReviews in side of fetchProductReviews for...',prod.rows[0].product_name,'.\n', allProductReviews.rows.length)
-  console.log('fetchProductReviews...DONE')
+  // console.log('fetchProductReviews...DONE')
   return allProductReviews.rows
   // let ratingDenom = allProductReviews.rows.length
   // let aggRating = 0
@@ -218,16 +189,18 @@ export async function fetchAllProductsBySeller(id: any): Promise<any>{
 //fully operational
 export async function fetchUser(id: any): Promise<any>{
   try{
-    console.log('here is id in fetch userrr', id)
+    // console.log('here is id in fetch userrr', id)
     const user = await sql `SELECT * FROM users WHERE user_id=${id};`
    
     // const sellers = await sql `SELECT * FROM sellers;`
     // const prods = await sql `SELECT * FROM products WHERE product_id=${id};`
 
-    console.log('here is user in fetchUser...',user.rows[0]
-      // ,'here are all the sellers', sellers.rows
-      // ,'\nhere are all prods with the id', prods.rows
-    )
+    // console.log('here is user in fetchUser...',user.rows[0]
+    //   // ,'here are all the sellers', sellers.rows
+    //   // ,'\nhere are all prods with the id', prods.rows
+    // )
+
+
     return user.rows[0] 
   }catch (error){
     console.log('fetchUser error... Operation Canceled ')//, error)
@@ -246,10 +219,10 @@ export async function fetchSeller(id: any): Promise<any>{
     // const sellers = await sql `SELECT * FROM sellers;`
     // const prods = await sql `SELECT * FROM products WHERE product_id=${id};`
 
-    console.log('here is user in fetchSeller...',user.rows[0]
-      // ,'here are all the sellers', sellers.rows
-      // ,'\nhere are all prods with the id', prods.rows
-    )
+    // console.log('here is user in fetchSeller...',user.rows[0]
+    //   // ,'here are all the sellers', sellers.rows
+    //   // ,'\nhere are all prods with the id', prods.rows
+    // )
 
     return user.rows[0] 
   }catch (error){
@@ -273,14 +246,15 @@ export async function fetchProducts(){
 }
 
 export async function fetchProduct(id: any): Promise<any>{
-  console.log('herei the id in fetch product ', id)
+  // console.log('herei the id in fetch product ', id)
   // remove the line below it is for testing only
   // await addAnotherReview(id)
   try{
       //get product by id
       let result = await sql `SELECT * FROM products WHERE product_id=${id}`
       let productInfo = result.rows[0]
-      console.log('here i produt info in fetch prodcutt;lakj;dlk', productInfo)
+      // console.log('here i produt info in fetch prodcutt;lakj;dlk', productInfo)
+      
       // get & give seller name
       let sellerName = await sql `SELECT * FROM sellers WHERE seller_id=${result.rows[0].seller_id};`
       productInfo.sellerName = sellerName.rows[0].seller_name
@@ -310,14 +284,14 @@ export async function fetchProduct(id: any): Promise<any>{
           // productInfo.sellerName = sellerName.rows[0].seller_name
           // productInfo.product_rating = (aggRating / ratingDenom).toString()
           // productInfo.product_rating = productAvgRating
-          console.log('here is productInfo.....', productInfo,
-            // '\nhere is the products average rating...', (aggRating/ ratingDenom).toString(),
-            '\n here is allProductReviews...', allProductReviews.rows
-            // '63 out of 70 should be an average of 9...', (aggRating/ratingDenom).toString()
-            // ,'\n here is prodcutAveRating....',productAvgRating.rows[0].review_rating,
-            // '\n check the length of the returned results...', productAvgRating.rows.length,
-            // '\n now i am going to try to do some math...', productAvgRating.rows.length * -10 + productAvgRating.rows[0].review_rating  
-            )
+          // console.log('here is productInfo.....', productInfo,
+          //   // '\nhere is the products average rating...', (aggRating/ ratingDenom).toString(),
+          //   '\n here is allProductReviews...', allProductReviews.rows
+          //   // '63 out of 70 should be an average of 9...', (aggRating/ratingDenom).toString()
+          //   // ,'\n here is prodcutAveRating....',productAvgRating.rows[0].review_rating,
+          //   // '\n check the length of the returned results...', productAvgRating.rows.length,
+          //   // '\n now i am going to try to do some math...', productAvgRating.rows.length * -10 + productAvgRating.rows[0].review_rating  
+          //   )
           return productInfo
       }
   }catch (error){
@@ -344,13 +318,13 @@ export  async function setUserProdRating(
   const rating = Number(reviewRating);
   const currentDate = date.toISOString();
 
-  console.log('here is...', date,
-    '\n user...',user,
-    '\n product...',product,
-    '\n review',review,
-    '\n rating...',rating,
-    '\nISOdate...',currentDate
-  )
+  // console.log('here is...', date, 
+  //   '\n user...',user,
+  //   '\n product...',product,
+  //   '\n review',review,
+  //   '\n rating...',rating,
+  //   '\nISOdate...',currentDate
+  // )
   //will need to send this to an api route???
   try{
     // const reviews = await sql `SELECT * FROM reviews ;`
@@ -358,14 +332,8 @@ export  async function setUserProdRating(
       // , 'here is productttttttttt...', product
     // )
 
-    // const info = await sql`SELECT 
-    //                     *
-    //                 FROM 
-    //                     information_schema.columns
-    //                 WHERE 
-    //                     table_name = 'reviews';
-    //       `
-    // console.log('here is infoooooooooooooooooooooooooo',info.rows)
+    
+
     await sql `INSERT INTO reviews (
                 product_id, user_id, review_rating, date_added, review_description 
                 )
@@ -376,7 +344,7 @@ export  async function setUserProdRating(
                     );`
 
     const reviews = await sql `select * from reviews where product_id=${product};`
-    console.log('here is reviewsssssssssssss',reviews.rows)
+    console.log('here is/are the review(s)',reviews.rows)
   }catch (error){
     console.log('here is the error in setUserProdRating...',error)
   }
@@ -482,8 +450,6 @@ export async function createNewProdcut(
   }catch (error){
     console.log('Error trying to retrieve all prods by seller id in createNewProduct...',error)
   }
-
-
 
   revalidatePath('/product/add')
   redirect(`/product/${id}`)

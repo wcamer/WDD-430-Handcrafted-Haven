@@ -10,7 +10,7 @@ import { notFound } from 'next/navigation';
 export const metadata: Metadata = {
   title: 'Product Page ',
 };
-
+ 
 
 interface Product {
     product_id: string;
@@ -89,7 +89,6 @@ export default async function Page({ params }: { params: {id: string , userId: s
     <main className="h-[32rem]">
       
       <Header />
-      {/* <h1>Product Page but for idddddddddddddddd</h1> */}
       <div className={`outline p-2 m-2  md:grid grid-cols-5` }>
         <div className='md:col-start-2 col-end-5'>
             <ProductHighlight product={product} user={user}/>

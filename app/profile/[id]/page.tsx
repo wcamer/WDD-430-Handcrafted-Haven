@@ -45,7 +45,7 @@ export default  async function Page({params}: {params: {id: string}}) {
     const accountId = params.id
     let displayedProfile
     let user
-    console.log('here is accountId in profile [id] page....', accountId)
+    // console.log('here is accountId in profile [id] page....', accountId)
     const cus = '577dd9e6-1af9-484a-ac7c-ddab33403f54'// this is customer id
     const sell = 'b3a538e3-e006-4fbc-b334-f53d599ade77' // this is a seller id
 
@@ -54,26 +54,12 @@ export default  async function Page({params}: {params: {id: string}}) {
 //////////////////modular look up
     const profileInfo = await fetchProfile(accountId)
 
-    console.log('herei the profileInfo after finding.....', profileInfo)
+    // console.log('herei the profileInfo after finding.....', profileInfo)
 
     if(profileInfo.account_type === 'seller'){
-        // const sellersProducts = await fetchAllProductsBySeller(accountId)
-        // let sellerTotalRatingPoints = 0; //starting amount
-        // {
-        //             for (let i = 0; i < sellersProducts.length; i++ ){
-        //                 // sellerOverallRating += await fetchSellersOverallRating(sellersProducts[i].product_id)
-        //                 const pr = await fetchSellersOverallRating(sellersProducts[i].product_id)
-            
-        //                 // console.log('the cont int he forrrrrrrrr is...',i
-        //                 //     ,'\nhere is sellerProducts length...', sellersProducts.length
-        //                 //     ,'\n Here is pr....',pr
-        //                 // )
-        //                 sellerTotalRatingPoints+= pr
-            
-        //             } 
-        //         }
-        //         let sellerAveRating = sellerTotalRatingPoints / sellersProducts.length
-        console.log('we got a seller................................')
+
+        // console.log('we got a seller................................')
+       
         let seller: Seller = {
             seller_id: profileInfo.seller_id,
             seller_name: profileInfo.seller_name,
@@ -93,7 +79,7 @@ export default  async function Page({params}: {params: {id: string}}) {
         
         displayedProfile = <SellerProfile seller={seller} />
     } else {
-        console.log("we got a customer...\nhere is the info........\n",profileInfo)
+        // console.log("we got a customer...\nhere is the info........\n",profileInfo)
         
 
 
@@ -108,25 +94,13 @@ export default  async function Page({params}: {params: {id: string}}) {
             buyHistory: profileInfo.buyHistory
         }
 
-        console.log('here is the loaded customer var...\n',customer)
 
         displayedProfile = <CustomerProfile customer={customer}  />
-        // displayedProfile = <CustomerProfile  customer={customer} />
 
 
 
     }
-    // const [sellersProducts] = await Promise.all([
-    //     fetchProfile(accountId), 
-    //     fetchAllProductsBySeller(accountId),
-    //     fetchSellersOverallRating(accountId)
-    // ])
-
-///////////////end of modular
-
-
-    // let displayedProfile =    <SellerProfile />  //this will be the variable that is passed a profile
-        
+    
     
 
   return (

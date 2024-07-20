@@ -6,7 +6,7 @@ import Products from '@/app/ui/products.module.css';
 
 export default function ProductDisplay({props}: {props: any}) {
 
-  console.log('here is props in product-disaplyyyyyy', props)
+//   console.log('here is props in product-disaplay...', props)
 
   if(props.product_rating === 0){
     props.product_rating = 'Pending'
