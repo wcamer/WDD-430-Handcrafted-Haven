@@ -38,7 +38,7 @@ export default function CustomerProfile({customer}: {customer: Customer}){
             </section>
 
             <form className="outline p-6 m-6 md:col-start-3 ">
-                <fieldset className="">
+                <fieldset className="text-xl">
                     <legend>Customer Information</legend>
                     <label htmlFor='name'>Name</label><br />
                     <input type='text'id='name'value={customer.user_name} readOnly></input><br /><br />
@@ -61,10 +61,10 @@ export default function CustomerProfile({customer}: {customer: Customer}){
                 </fieldset>
             </form>
 
-            <div className="outline">
-                <h1>history component</h1>
-                <div>
-                    <div className="p-2 m-2 md:grid grid-cols-3 lg:grid-cols-5">
+            <div className="outline  p-2 m-2 md:col-start-2 md:row-start-3 md:col-span-3">
+                <h1 className=" text-2xl text-center p-2 m-2">Purchase History</h1>
+                <div className="flex flex-col justify-center justify-around">
+                    <div className="p-2 m-2 flex justify-around">
                         {items.map((item: any ) => {
                         console.log('here is a single item***********************************', item)
                             return (

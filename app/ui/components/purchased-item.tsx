@@ -22,8 +22,8 @@ export default async function PurchasedItem({props}: {props: any}) {
         <Link href={`/product/${item.product_id}`}>
           <Image
             src={item.product_image}
-            width={600}
-            height={600}
+            width={100}
+            height={100}
             alt={`This is an image of ${item.product_name}`}
           />
         </Link>
