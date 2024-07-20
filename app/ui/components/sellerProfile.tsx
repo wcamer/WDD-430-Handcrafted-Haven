@@ -79,7 +79,7 @@ export default async function SellerProfile({seller}: {seller: Seller}){
                     {products.map((product: Product) => {
                       console.log('here is a single producttttttttt', product)
                         return (
-                        <div className="p-2 ">
+                        <div className="p-2 " key={product.id}>
                           <ProfileProductDisplay
                          
                             props={product}

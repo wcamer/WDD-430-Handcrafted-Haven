@@ -62,15 +62,15 @@ export default function CustomerProfile({customer}: {customer: Customer}){
             </form>
 
             <div className="outline">
-                <h1>history compoenent</h1>
+                <h1>history component</h1>
                 <div>
                     <div className="p-2 m-2 md:grid grid-cols-3 lg:grid-cols-5">
                         {items.map((item: any ) => {
-                        console.log('here is a single item', item)
+                        console.log('here is a single item***********************************', item)
                             return (
-                            <div className="p-2 ">
+                            <div className="p-2 " key={item.product_id}>
                             <PurchasedItem
-                                    key={item.product_id}
+                                   
                                     props={item}
                             />
                             </div>
