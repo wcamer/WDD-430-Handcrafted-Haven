@@ -1,4 +1,4 @@
-'use server'
+// 'use server'
 
 import {sql} from '@vercel/postgres'
 
@@ -720,6 +720,10 @@ async function addAnotherReview(id: any) {
 }
 // Pagination
 export const generatePagination = (currentPage: number, totalPages: number) => {
+  console.log('here is current page in generate pagination...', currentPage
+    ,'total pages in getneratePagination....', totalPages)
+
+ 
   if (totalPages <= 7) {
     return Array.from({ length: totalPages }, (_, i) => i + 1);
   }
