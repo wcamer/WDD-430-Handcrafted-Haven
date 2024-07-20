@@ -7,7 +7,7 @@ import { Metadata } from 'next';
 
 
 export const metadata: Metadata = {
-  title: 'Product Not Found ',
+  title: 'Product Deleted Successfully ',
 };
 export default async function Page() {
   
@@ -17,7 +17,7 @@ export default async function Page() {
     <main className="h-[32rem]">
       
       <Header />
-      <h1 className="text-center text-3xl p-6 m-6">Uh-Oh! Something Went Wrong...</h1>
+      <h1 className="text-center text-3xl p-6 m-6">Product Deleted Successfully</h1>
       
       <div className="flex justify-center p-6 m-6">
         <button className="place-content-center ">

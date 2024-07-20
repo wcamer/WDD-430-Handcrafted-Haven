@@ -7,7 +7,7 @@ import {
   updateCartItemQuantity,
 } from '@/app/lib/util';
 
-// placeholder test code below
+
 export default function ProductDisplay(props: {
   id: string;
   name: string;

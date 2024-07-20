@@ -1,10 +1,13 @@
 // import Header from '../ui/header'
 import Header from '../ui/header';
 import Footer from '../ui/footer'
-import RegForm from '../ui/components/registration-form';
 import SellerProfile from '../ui/components/seller-profile';
 import CustomerProfile from '../ui/components/customer-profile';
+import { Metadata } from 'next';
 
+export const metadata: Metadata ={
+  title: 'Dummy Profile page'
+}
 
 export default  function Page() {
 

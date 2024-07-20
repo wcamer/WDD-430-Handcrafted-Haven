@@ -1,5 +1,4 @@
 import Login from '@/app/ui/login.module.css'
-
 import Link from 'next/link' // this might be removed in the future
 
 export default function LoginForm(){
@@ -16,8 +15,7 @@ export default function LoginForm(){
                     <label htmlFor='password'>Password</label><br />
                     <input type='text' id='password'/><br /><br />
                   
-                    {/* <input className={`${Register.submitBtn} `} type='submit' value='Complete Order' /> */}
-                    
+        
                     <Link className={`${Login.submitBtn} `}
                     href='/'>
                         <button>Login</button>

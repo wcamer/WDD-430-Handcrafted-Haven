@@ -1,6 +1,17 @@
 import Image from "next/image"
 
+interface Customer {
+    user_id: string;
+    user_name: string;
+    user_email: string;
+    user_city: string;
+    user_state: string;
+    user_address: string;
+    user_zip: string;
+    buyHistory: any;
 
+  }
+  
 export default async function CustomerProfile(){
 
 

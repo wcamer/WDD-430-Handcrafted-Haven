@@ -14,15 +14,25 @@ interface Product {
  
  
  export function ReviewForm({product, user}: {product: any, user: any} ){
-    const [reviewRating, setReviewRating] = useState('')
+    const [reviewRating, setReviewRating] = useState('') 
     const [reviewDesc, setReviewDesc] = useState('')
 
-    const handleSubmit =  (e: any)  =>{
-        e.preventDefault();
-        const userId =  user.user_id// 'insert user id here'
-        const productId = product.product_id //'insert prod id here'
-        setUserProdRating(userId, productId, reviewRating, reviewDesc)
-    }
+    const userId = user.user_id
+    // console.log('here is userId in the review form', userId)
+    const productId = product.product_id
+    const settingUserProdRating = setUserProdRating
+                .bind(
+                    null,
+                    userId,
+                    productId,
+                    reviewRating,
+                    reviewDesc
+
+                )
+
+    const formAction = settingUserProdRating
+    
+ 
 
 
 
@@ -31,9 +41,8 @@ interface Product {
 
     
  <section className={`${Highlight.rating} p-2 m-2 outline md: col-start-2 row-start-2`}>
-{/* <section> */}
                 <form className={`${Highlight.ratingForm}`}
-                onSubmit={handleSubmit}
+                action={formAction}
                 >
                     <fieldset className="flex flex-col ">
                         <legend className="text-2xl text-center">Leave A Review</legend><br></br>
@@ -69,8 +78,6 @@ interface Product {
                         <button className={`${Highlight.submitBtn} outline p-2 m-2`} 
                         type='submit'
                         disabled={!reviewRating || !reviewDesc}
-                        // onClick={setUserProdRating('someuser','prodid','reviewer rating', 'review description')}
-                        // onClick={document.querySelector('.Highlight.submitBtn').setAttribute='disabled'}
                         
                        
                         >
