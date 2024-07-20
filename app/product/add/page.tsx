@@ -2,7 +2,7 @@
 import Header from '@/app/ui/header';
 import Footer from '@/app/ui/footer';
 import ProductHighlight from '@/app/ui/components/productHighlight';
-import { fetchProduct, fetchUser, checkSeller } from '@/app/lib/util';
+import { fetchProduct, fetchUser, checkSeller } from '@/app/lib/serv-util';
 import { ProductEditForm } from '@/app/ui/components/product-edit-form';
 import { Metadata } from 'next';
 import Highlight from '@/app/ui/product-highlight.module.css'

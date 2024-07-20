@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Highlight from '@/app/ui/product-highlight.module.css'
-import { setUserProdRating } from "@/app/lib/util";
+import { setUserProdRating } from "@/app/lib/serv-util";
 import { useState } from "react";
 
 

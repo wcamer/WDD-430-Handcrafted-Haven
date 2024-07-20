@@ -2,7 +2,7 @@
 
 import PE from '@/app/ui/product-edit.module.css' // will be changed
 import { useState } from 'react'
-import { createNewProdcut } from '@/app/lib/util'
+import { createNewProdcut } from '@/app/lib/serv-util'
 
 
 interface Seller{

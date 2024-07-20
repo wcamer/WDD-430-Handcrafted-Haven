@@ -1,7 +1,7 @@
 // import Header from '../ui/header'
 import Header from '@/app/ui/header';
 import Footer from '@/app/ui/footer';
-import { fetchProduct, fetchSeller } from '@/app/lib/util';
+import { fetchProduct, fetchSeller } from '@/app/lib/serv-util';
 import { DeleteProductForm } from '@/app/ui/components/product-delete-form';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
