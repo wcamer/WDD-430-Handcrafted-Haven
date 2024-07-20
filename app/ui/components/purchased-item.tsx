@@ -17,7 +17,7 @@ export default async function PurchasedItem({props}: {props: any}) {
     props.product_rating = 'Pending'
   }
   return (
-    <section className={`${Products.prodCont} outline `} key={item.product_id}>
+    <section className={`${Products.prodCont} outline `} key={props.product_id}>
       <div className="flex justify-center p-2 m-2">
         <Link href={`/product/${item.product_id}`}>
           <Image
