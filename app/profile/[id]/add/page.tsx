@@ -38,7 +38,7 @@ export default async function Page({ params }: { params: {id: string, userId: st
     // const id = params.id; // this will be for production
     // let user_id = params.id
     let user_id = 'b3a538e3-e006-4fbc-b334-f53d599ade77' // this is for testing
-    console.log("!!!!!!!!!!!!! in the product add", params.id)
+    // console.log("!!!!!!!!!!!!! in the product add", params.id)
 
     if(params.id === undefined){
 

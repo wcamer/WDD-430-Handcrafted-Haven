@@ -75,7 +75,9 @@ export default  async function Page({params}: {params: {id: string}}) {
             account_type: profileInfo.account_type,
             products: profileInfo.products
         }
-      
+
+        // console.log('here is seller in profile [iddddddddddddddd', seller)
+       
         
         displayedProfile = <SellerProfile seller={seller} />
     } else {

@@ -11,7 +11,7 @@ interface Seller{
 
 
 export function NewProductForm({seller}: {seller: string}){
-    console.log('here is seller in newproductform....',seller)
+    // console.log('here is seller in newproductform....',seller)
 
     const [prodName, setProdName] = useState('')
     const [desc, setDesc] = useState('')
@@ -60,7 +60,7 @@ export function NewProductForm({seller}: {seller: string}){
                 <input 
                 required
                 type='text'
-                value={image}
+                value={'/images/600x600ph.jpg'}
                 placeholder='/images/600x600ph.jpg'
                 onChange={(e) => setImage(e.target.value)}
                 ></input><br></br>

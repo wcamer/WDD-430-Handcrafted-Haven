@@ -1,15 +1,24 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import Products from '@/app/ui/products.module.css';
+import { productAveRating } from '@/app/lib/serv-util';
 
 
 
-export default function ProductDisplay({props}: {props: any}) {
+export default async function ProductDisplay({props}: {props: any}) {
 
 //   console.log('here is props in product-disaplay...', props)
 
-  if(props.product_rating === 0){
-    props.product_rating = 'Pending'
+    let getProdAve = await productAveRating(props.product_id)
+
+    let aveRating = getProdAve
+    let rating 
+    // console.log('averating........', aveRating)
+
+  if(aveRating === 0){
+    rating = 'Pending'
+  } else{
+    rating = aveRating
   }
   return (
     <section className={`${Products.prodCont} outline `} key={props.product_id}>
@@ -29,7 +38,7 @@ export default function ProductDisplay({props}: {props: any}) {
           Price: $<span>{props.product_price}</span>
         </p>
         <p>
-          Rating: <span>{props.product_rating}</span>
+          Rating: <span>{rating}</span>
         </p>
       </div>
       <div className="text-center">

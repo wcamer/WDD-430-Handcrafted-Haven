@@ -234,9 +234,9 @@ export async function fetchProfile(id: any): Promise<any>{
     let sellerAveRating; //this will be either pending or a number at the end
         for (let i = 0; i < sellersProducts.length; i++ ){
             const pr = await fetchProductReviews(sellersProducts[i].product_id)
-            console.log('Here are the product reviews returned to fetchProfile...\n'
-              ,pr
-            )
+            // console.log('Here are the product reviews returned to fetchProfile...\n'
+            //   ,pr
+            // )
            
 
             if(pr.length > 0){
@@ -305,7 +305,7 @@ export async function fetchProfile(id: any): Promise<any>{
 export async function checkSeller(id: any) {
   try{
       let seller = await sql `SELECT * FROM sellers WHERE seller_id=${id}`
-      console.log('@@@@@@@',seller.rows)
+      // console.log('@@@@@@@',seller.rows)
       return seller.rows
   }catch{
     console.log(' the checkSeller search didnt work..........')
@@ -346,7 +346,7 @@ export async function fetchProductReviews(id: any): Promise<any>{
 export async function fetchAllProductsBySeller(id: any): Promise<any>{
    const prods = await sql `SELECT * FROM products WHERE seller_id=${id}`
   //  console.log('here are your products in fetchallproducts...',prods.rows)
-  console.log("fetchAllProductsBySeller...DONE")  
+  // console.log("fetchAllProductsBySeller...DONE")  
   return prods.rows
 
   }

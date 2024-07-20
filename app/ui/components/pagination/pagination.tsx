@@ -19,10 +19,6 @@ export default async function Pagination({ totalPages }: { totalPages: number })
 
   const allPages =  generatePagination(currentPage, totalPages);
 
-  // const generatedPagination = generatePagination.bind(null,currentPage, totalPages)
-
-  console.log('pageination!!!!!!!!!!!!!!!!!!!!!\n', allPages)
-
   return (
     <div className="inline-flex">
       <PaginationArrow

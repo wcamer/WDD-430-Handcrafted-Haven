@@ -57,20 +57,23 @@ export async function fetchProfile(id: any): Promise<any>{
     //this is going to return a seller
     const search = await sql `SELECT * FROM sellers WHERE seller_id=${id};`
     user = search.rows[0]
+    // console.log('here is user in fetchprofile', user)
     
     //this part will get average review score for seller
     const sellersProducts = await fetchAllProductsBySeller(id)
     // console.log('here is how many products this seller hasssssssssssss', sellersProducts.length)
+    // console.log('here are the seller productssssssssssss', sellersProducts)
    
-   //review average section
+   
+    //review average section
     let sellerTotalRatingPoints = 0; //starting amount
     let denom = 0 // initial value to figure sellerAveRating
     let sellerAveRating; //this will be either pending or a number at the end
         for (let i = 0; i < sellersProducts.length; i++ ){
             const pr = await fetchProductReviews(sellersProducts[i].product_id)
-            console.log('Here are the product reviews returned to fetchProfile...\n'
-              ,pr
-            )
+            // console.log('Here are the product reviews returned to fetchProfile...\n'
+            //   ,pr
+            // )
            
 
             if(pr.length > 0){
@@ -139,7 +142,7 @@ export async function fetchProfile(id: any): Promise<any>{
 export async function checkSeller(id: any) {
   try{
       let seller = await sql `SELECT * FROM sellers WHERE seller_id=${id}`
-      console.log('@@@@@@@',seller.rows)
+      // console.log('@@@@@@@',seller.rows)
       return seller.rows
   }catch{
     console.log(' the checkSeller search didnt work..........')
@@ -180,7 +183,7 @@ export async function fetchProductReviews(id: any): Promise<any>{
 export async function fetchAllProductsBySeller(id: any): Promise<any>{
    const prods = await sql `SELECT * FROM products WHERE seller_id=${id}`
   //  console.log('here are your products in fetchallproducts...',prods.rows)
-  console.log("fetchAllProductsBySeller...DONE")  
+  // console.log("fetchAllProductsBySeller...DONE")  
   return prods.rows
 
   }
@@ -269,10 +272,11 @@ export async function fetchProduct(id: any): Promise<any>{
         let ratingDenom = allProductReviews.rows.length
         let aggRating = 0
          // let productInfo = result.rows[0]
+        //  console.log('here is allproductreviewsssss', allProductReviews.rows)
         for(let i = 0; i < allProductReviews.rows.length; i++){
             aggRating += allProductReviews.rows[i].review_rating
         }
-        productInfo.product_rating = (aggRating / ratingDenom).toString()
+        productInfo.product_rating = (aggRating / ratingDenom)//.toString()
 
 
           
@@ -499,6 +503,27 @@ export async function editProduct(
 
   revalidatePath(`/product/${id}/edit`)
   redirect(`/product/${id}`)
+}
+
+export async function productAveRating(id:any){
+  let ave = 0;
+  
+  let allProductReviews = await sql `Select * FROM reviews WHERE product_id=${id}`
+      if(allProductReviews.rows.length < 1){
+        
+        return ave
+      }
+      else{
+        let ratingDenom = allProductReviews.rows.length
+
+        for(let i = 0; i < allProductReviews.rows.length; i++){
+            ave += allProductReviews.rows[i].review_rating
+        }
+        ave /=  ratingDenom
+        return ave
+      } 
+
+
 }
 
 // testing only
