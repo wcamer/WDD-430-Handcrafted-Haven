@@ -413,7 +413,8 @@ export async function createNewProdcut(
 // ${sellerId}, ${name}, ${description}, ${initialRating} ${Math.round(price)}, ${thumbnail}, ${image}, ${currentDate})
 // `
 //   )
-  
+
+
 
   try{
     await sql`INSERT INTO products 
@@ -433,17 +434,28 @@ export async function createNewProdcut(
   //test to see that product was created successfully
   let id
   try{
-   const prods = await sql `SELECT * FROM products WHERE seller_id=${sellerId}`
+
+    const product = await sql `SELECT * FROM products WHERE product_name=${name}`
+    id = product.rows[0].product_id
+
+    // console.log('here is producttttttt.....', product.rows
+    //   ,'\nhere is id.......',id
+    // )
+
+
+  //  const prods = await sql `SELECT * FROM products WHERE seller_id=${sellerId}`
     // console.log('here are prods after it was created...',prods.rows)
-    const newestProductRowIndex = (prods.rows.length) - 1
+    // const newestProductRowIndex = (prods.rows.length) - 1
     // console.log('here is the lengthe of prods.rows.length...', prods.rows.length
     //   , newestProductRowIndex
     //   , prods.rows[newestProductRowIndex].product_id
     // )
 
-    id = prods.rows[newestProductRowIndex].product_id
+    // id = prods.rows[newestProductRowIndex].product_id
 
-    // console.log('here is the proID for the redirect', id)
+    // console.log('here is the proID for the redirect', id
+    //   ,'here is prods in createnewproduct...' ,prods.rows
+    // )
     // revalidatePath('/product/add')
        // redirect(`/product/${id}`)
 

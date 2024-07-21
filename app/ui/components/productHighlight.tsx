@@ -44,6 +44,11 @@ export default async function ProductHighlight({product, user}: {product: any, u
 
         if(rating === 0){
             rating = 'Pending'
+        }else{
+            //check to see if rating a whole number
+            if(rating % 1 != 0){
+                rating = rating.toFixed(2)
+            }
         }
         console.log('here is pName, sName, rating, and imageurl...', prodName, sellerName, rating, imageUrl)
 

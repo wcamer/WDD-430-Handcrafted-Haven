@@ -13,7 +13,7 @@ interface Seller {
   seller_state: string;
   seller_address: string;
   seller_zip: string;
-  aveRev: number;
+  aveRev: any;
   account_type: string;
   products: any;
   
@@ -27,7 +27,7 @@ export default async function SellerProfile({seller}: {seller: Seller}){
         name: string;
         imageUrl: string;
         price: number; 
-        rating: number;
+        rating: any;
         id: string;
         sellerId: string;
         sellerName: string;
@@ -38,7 +38,14 @@ export default async function SellerProfile({seller}: {seller: Seller}){
 
     const products = seller.products
     // console.log('products in sellProfile componenet..........\n',products)
-  
+    if(seller.aveRev === 0){
+      seller.aveRev = 'Pending'
+    }else{
+      //check to see if rating a whole number
+      if(seller.aveRev % 1 != 0){
+          seller.aveRev = (seller.aveRev).toFixed(2)
+      }
+    }
     return (
         <div className="lg:grid grid-cols-2">
             <div className="flex justify-center items-center justify-around lg:col-span-2">
