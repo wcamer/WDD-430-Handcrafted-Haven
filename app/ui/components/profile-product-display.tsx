@@ -11,14 +11,18 @@ export default async function ProductDisplay({props}: {props: any}) {
 
     let getProdAve = await productAveRating(props.product_id)
 
-    let aveRating = getProdAve
-    let rating 
+    let aveRating 
+     aveRating= getProdAve
+     
     // console.log('averating........', aveRating)
 
   if(aveRating === 0){
-    rating = 'Pending'
+    aveRating = 'Pending'
   } else{
-    rating = aveRating
+    if(aveRating % 1 !=0){
+
+        aveRating = (aveRating.toFixed(2))
+    }
   }
   return (
     <section className={`${Products.prodCont} outline `} key={props.product_id}>
@@ -38,7 +42,7 @@ export default async function ProductDisplay({props}: {props: any}) {
           Price: $<span>{props.product_price}</span>
         </p>
         <p>
-          Rating: <span>{rating}</span>
+          Rating: <span>{aveRating}</span>
         </p>
       </div>
       <div className="text-center">
