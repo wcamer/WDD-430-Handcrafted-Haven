@@ -8,10 +8,12 @@ import Home from '@/app/ui/home-page.module.css';
 import { useState } from 'react';
 import { string } from 'zod';
 
+
 // const width = useState(window.innerWidth)
 // console.log("the screen width is....", width)
 
 export default function ProductListing() {
+
   interface Product {
     name: string;
     imageUrl: string;

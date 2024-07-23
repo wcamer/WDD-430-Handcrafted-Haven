@@ -66,11 +66,17 @@ export async function authenticate(
     formData: FormData,
   ) {
     try {
-      await signIn('credentials', formData);
+      console.log('start login');
+      let response = await signIn('credentials', formData);
+      console.log('auth login ', response);
         //clean the cache
-        console.log('redirect!');
-        revalidatePath('/profile');
-        redirect('/profile');
+        if(response) {
+          console.log('login response ', response);
+          console.log('redirect!');
+          revalidatePath('/profile');
+          redirect('/profile');
+        }
+        
     } catch (error) {
       if (error instanceof AuthError) {
         switch (error.type) {

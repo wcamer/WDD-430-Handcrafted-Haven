@@ -1,3 +1,4 @@
+import { SessionProvider } from 'next-auth/react';
 import Header from './ui/header';
 import Footer from './ui/footer';
 import '@/app/ui/global.css';
@@ -5,16 +6,15 @@ import ProductListing from './ui/components/home-product-listing';
 
 export default function RootLayout({
   children,
+  session,
 }: {
   children: React.ReactNode;
+  session: any;
 }) {
   return (
     <html lang="en">
       <body>
-        {/* <Header /> */}
-        {children}
-        {/* <ProductListing />
-        <Footer /> */}
+        <SessionProvider session={session}>{children}</SessionProvider>
       </body>
     </html>
   );
