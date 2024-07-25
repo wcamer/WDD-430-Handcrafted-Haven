@@ -37,7 +37,7 @@ export const { auth, signIn, signOut } = NextAuth({
             password,
             user.user_password,
           );
-          //console.log('password match ', passwordsMatch);
+          console.log('password match ', passwordsMatch);
 
           if (passwordsMatch) return user;
         }

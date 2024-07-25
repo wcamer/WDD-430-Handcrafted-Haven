@@ -1,19 +1,23 @@
-'use client'
+'use server'
 import Link from 'next/link';
 import Image from 'next/image';
 import NavigationMenu from './components/navigation-menu';
 
 import Spacer from '@/app/ui/spacer.module.css';
 import { signOut } from '@/auth';
-import {  useSession } from 'next-auth/react';
+
+import { cookies } from 'next/headers';
+import { setEngine } from 'crypto';
 
 
-export default function Header() {
+export default async function Header() {
   // change when login status is conplete
   const isLoggedIn: boolean = false;
-  const { data: session, status } = useSession();
-  console.log('session ', session?.user?.email);
-  console.log('status session ', status);
+  const cookieStore = cookies();
+  const sessionId = cookieStore.get('session_id');
+  console.log('cookies ', cookieStore)
+  console.log('session id ', sessionId);
+  
 
   return (
     <header
